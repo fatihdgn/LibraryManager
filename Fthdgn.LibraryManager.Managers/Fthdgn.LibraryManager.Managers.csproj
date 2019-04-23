@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0AE812B8-3932-48C4-8EA8-716E4A50E6D8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fthdgn.LibraryManager.Managers</RootNamespace>
+    <AssemblyName>Fthdgn.LibraryManager.Managers</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LibraryManager.cs" />
+    <Compile Include="LibraryManagerManager.cs" />
+    <Compile Include="LibraryManagerManagers.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleManager.cs" />
+    <Compile Include="ScopeManager.cs" />
+    <Compile Include="UserManager.cs" />
+    <Compile Include="UserRoleManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fthdgn.LibraryManager.Context\Fthdgn.LibraryManager.Context.csproj">
+      <Project>{615C1BA8-627F-4368-9C08-BE9E6A9B6850}</Project>
+      <Name>Fthdgn.LibraryManager.Context</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fthdgn.LibraryManager.Entities\Fthdgn.LibraryManager.Entities.csproj">
+      <Project>{0E52AF42-E481-4FF4-9559-0B1053408B65}</Project>
+      <Name>Fthdgn.LibraryManager.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fthdgn.LibraryManager.Extensions\Fthdgn.LibraryManager.Extensions.csproj">
+      <Project>{91EF0C6D-5255-4A64-9BF1-3315B26E4FBF}</Project>
+      <Name>Fthdgn.LibraryManager.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fthdgn.LibraryManager.Repositories\Fthdgn.LibraryManager.Repositories.csproj">
+      <Project>{7B410E74-42FD-4471-AA4F-F84726D0BD1A}</Project>
+      <Name>Fthdgn.LibraryManager.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fthdgn.LibraryManager.Utilities\Fthdgn.LibraryManager.Utilities.csproj">
+      <Project>{9422EC32-93F8-44DF-BDED-B65124E54F4E}</Project>
+      <Name>Fthdgn.LibraryManager.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
