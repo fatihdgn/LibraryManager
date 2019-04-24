@@ -27,11 +27,11 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
     public class MainViewModel : ViewModel
     {
         User user;
-        public User User { get => user; set { Set(ref user, value); RaisePropertyChanged(nameof(CanShowUserInfo)); } }
+        public User User { get => user; set { Set(ref user, value, broadcast: true); RaisePropertyChanged(nameof(CanShowUserInfo)); } }
         public bool CanShowUserInfo => User != null;
 
         Library library;
-        public Library Library { get => library; set { Set(ref library, value); RaisePropertyChanged(nameof(CanShowLibraryInfo)); } }
+        public Library Library { get => library; set { Set(ref library, value, broadcast: true); RaisePropertyChanged(nameof(CanShowLibraryInfo)); } }
         public bool CanShowLibraryInfo => Library != null;
 
         public IDialogCoordinator Dialog { get; set; }

@@ -41,14 +41,12 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
-            Reregister<ViewModelLocator>();
             Register<MainViewModel>();
             Register<LoginViewModel>();
             Register<LibrariesViewModel>();
             Register<HomeViewModel>();
         }
-
-        void Reregister<T>() where T : class => SimpleIoc.Default.Reregister<T>();
+        
         void Register<T>() where T : class => SimpleIoc.Default.Register<T>();
         T Get<T>() => ServiceLocator.Current.GetInstance<T>();
 

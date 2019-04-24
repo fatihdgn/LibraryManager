@@ -28,8 +28,8 @@
                         <ColumnDefinition />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Kullanıcı Girişi" VerticalAlignment="Center" FontFamily="Segoe UI Light" FontSize="20" Foreground="{DynamicResource HighlightBrush}" />
-                    <icons:PackIconMaterial Grid.Column="1" Kind="Lock"  Width="32" Height="32" Foreground="{DynamicResource HighlightBrush}" />
+                    <TextBlock Grid.Column="0" Text="Kullanıcı Girişi" VerticalAlignment="Center" FontSize="20" Style="{DynamicResource Header}" />
+                    <icons:PackIconMaterial Grid.Column="1" Kind="Lock"  Width="32" Height="32" Foreground="{DynamicResource ForegroundColorBrush}" />
                 </Grid>
                 <TextBox Text="{Binding Username}" Margin="0 0 0 5" mah:TextBoxHelper.Watermark="Kullanıcı adı ya da mail adresi" mah:TextBoxHelper.UseFloatingWatermark="True"></TextBox>
                 <PasswordBox Margin="0 0 0 5" mah:TextBoxHelper.Watermark="Şifre" mah:TextBoxHelper.UseFloatingWatermark="True" PasswordChanged="PasswordBox_PasswordChanged"></PasswordBox>
