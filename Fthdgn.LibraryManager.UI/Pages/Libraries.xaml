@@ -51,7 +51,7 @@
                                 <Button Margin="2 0" Visibility="{Binding IsOptionsAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <icons:PackIconEntypo Kind="Cross" HorizontalAlignment="Center" Width="16" Height="16" />
                                 </Button>
-                                <Button Margin="2 0" Visibility="{Binding IsSelectable, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding DataContext.SelectItemCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}" CommandParameter="{Binding Value}">
+                                <Button Margin="2 0" Visibility="{Binding IsSelectable, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding DataContext.SelectItemCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}" CommandParameter="{Binding}">
                                     <icons:PackIconMaterial Kind="ArrowRightThick" HorizontalAlignment="Center" Width="16" Height="16" />
                                 </Button>
                             </StackPanel>

@@ -1,5 +1,6 @@
 ﻿using Fthdgn.LibraryManager.Entities;
 using Fthdgn.LibraryManager.Managers;
+using Fthdgn.LibraryManager.UI.Models;
 using Fthdgn.LibraryManager.UI.Pages;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -28,9 +29,9 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
         protected override IEnumerable<Library> ProvideItems() => Managers.Libraries.ByUser(Locator.Main.User);
         protected override bool FilterItem(string search, Library item) => item.Name.ToLowerInvariant().Contains(search.ToLowerInvariant());
-        protected override void OnSelectItem(Library item)
+        protected override void OnItemSelect(Options<Library> item)
         {
-            Locator.Main.Library = item;
+            Locator.Main.Library = item?.Value;
             Locator.Main.GoTo<Home>(Items.Count == 1);
         }
     }
