@@ -92,15 +92,16 @@
     </ApplicationDefinition>
     <Compile Include="Extensions\SimpleIocExtensions.cs" />
     <Compile Include="Models\Options.cs" />
+    <Compile Include="Models\Scopes.cs" />
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Libraries.xaml.cs">
-      <DependentUpon>Libraries.xaml</DependentUpon>
+    <Compile Include="Pages\UserLibraries.xaml.cs">
+      <DependentUpon>UserLibraries.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\ItemsViewModel.cs" />
-    <Compile Include="ViewModel\LibrariesViewModel.cs" />
+    <Compile Include="ViewModel\UserLibrariesViewModel.cs" />
     <Compile Include="Pages\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -125,7 +126,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Libraries.xaml">
+    <Page Include="Pages\UserLibraries.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

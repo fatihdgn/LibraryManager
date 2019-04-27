@@ -17,7 +17,6 @@ namespace Fthdgn.LibraryManager.Repositories
             Roles = new RoleRepository(Context);
             Loans = new LibraryManagerRepository<Loan>(Context);
             Media = new LibraryManagerRepository<Media>(Context);
-            LibraryBooks = new LibraryManagerRepository<LibraryBook>(Context);
             UserRoles = new UserRoleRepository(Context);
         }
 
@@ -28,8 +27,7 @@ namespace Fthdgn.LibraryManager.Repositories
         public RoleRepository Roles { get; set; }
         public LibraryManagerRepository<Loan> Loans { get; set; }
         public LibraryManagerRepository<Media> Media { get; set; }
-
-        public LibraryManagerRepository<LibraryBook> LibraryBooks { get; set; }
+        
         public UserRoleRepository UserRoles { get; set; }
     }
 }

@@ -41,7 +41,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             if(Managers.Users.Verify(Username, Password))
             {
                 Locator.Main.User = Managers.Repositories.Users.GetByUsernameOrMailAddress(Username);
-                Locator.Main.GoTo<Libraries>(removeHistory: true);
+                Locator.Main.GoTo<UserLibraries>(removeHistory: true);
             }
         }
     }

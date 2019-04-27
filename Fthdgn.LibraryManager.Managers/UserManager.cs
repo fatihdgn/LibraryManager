@@ -27,6 +27,7 @@ namespace Fthdgn.LibraryManager.Managers
 
         public User Admin() => Provide(nameof(Admin).ToLower(), username => new User {
             Username = username, 
+            Name = nameof(Admin),
             PasswordHash = username
         });
     }

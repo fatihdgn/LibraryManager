@@ -16,5 +16,7 @@ namespace Fthdgn.LibraryManager.Entities
         public virtual Media Image { get; set; }
         public virtual string LCC { get; set; }
         public virtual string LCCN { get; set; }
+        public virtual Library Library { get; set; }
+        public virtual List<Loan> Loans { get; set; }
     }
 }

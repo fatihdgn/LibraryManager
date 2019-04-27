@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Controls;
 using Fthdgn.LibraryManager.Entities;
 using Fthdgn.LibraryManager.UI.Extensions;
+using Fthdgn.LibraryManager.UI.Models;
 using Fthdgn.LibraryManager.UI.Pages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -34,13 +35,21 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         public Library Library { get => library; set { Set(ref library, value, broadcast: true); RaisePropertyChanged(nameof(CanShowLibraryInfo)); } }
         public bool CanShowLibraryInfo => Library != null;
 
+        Scopes scopes;
+        public Scopes Scopes
+        {
+            get => scopes;
+            set => Set(ref scopes, value, broadcast: true);
+        }
+
+
         public IDialogCoordinator Dialog { get; set; }
         public MainViewModel(ViewModelLocator locator) : base(locator)
         {
             Dialog = DialogCoordinator.Instance;
 
             SimpleIoc.Default.Reregister<Login>();
-            SimpleIoc.Default.Reregister<Libraries>();
+            SimpleIoc.Default.Reregister<UserLibraries>();
             SimpleIoc.Default.Reregister<Home>();
 
             GoBackCommand = new RelayCommand(GoBack, CanGoBack);
@@ -66,7 +75,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             switch (page)
             {
                 case nameof(Login): GoTo<Login>(); break;
-                case nameof(Libraries): GoTo<Libraries>(); break;
+                case nameof(UserLibraries): GoTo<UserLibraries>(); break;
                 case nameof(Home): GoTo<Home>(); break;
                 default:
                     break;

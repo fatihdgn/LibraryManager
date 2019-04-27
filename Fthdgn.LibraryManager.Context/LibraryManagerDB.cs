@@ -22,8 +22,7 @@ namespace Fthdgn.LibraryManager.Context
         public DbSet<Role> Roles { get; set; }
         public DbSet<Loan> Loans { get; set; }
         public DbSet<Media> Media { get; set; }
-
-        public DbSet<LibraryBook> LibraryBooks { get; set; }
+        
         public DbSet<UserRole> UserRoles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -16,6 +16,7 @@ namespace Fthdgn.LibraryManager.Entities
         public virtual string PhoneNumber { get; set; }
         public virtual string PasswordHash { get; set; }
         public virtual Media Image { get; set; }
-        public List<Role> Roles { get; set; } = new List<Role>();
+        public virtual List<UserRole> Roles { get; set; } = new List<UserRole>();
+        public virtual List<Loan> Loans { get; set; } = new List<Loan>();
     }
 }

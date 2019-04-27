@@ -43,7 +43,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             ////}
             Register<MainViewModel>();
             Register<LoginViewModel>();
-            Register<LibrariesViewModel>();
+            Register<UserLibrariesViewModel>();
             Register<HomeViewModel>();
         }
         
@@ -52,7 +52,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
         public MainViewModel Main => Get<MainViewModel>();
         public LoginViewModel Login => Get<LoginViewModel>();
-        public LibrariesViewModel Libraries => Get<LibrariesViewModel>();
+        public UserLibrariesViewModel UserLibraries => Get<UserLibrariesViewModel>();
         public HomeViewModel Home => Get<HomeViewModel>();
 
         public static void Cleanup()

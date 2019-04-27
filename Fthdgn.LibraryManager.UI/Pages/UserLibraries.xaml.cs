@@ -18,9 +18,9 @@ namespace Fthdgn.LibraryManager.UI.Pages
     /// <summary>
     /// Interaction logic for Home.xaml
     /// </summary>
-    public partial class Libraries : Page
+    public partial class UserLibraries : Page
     {
-        public Libraries()
+        public UserLibraries()
         {
             InitializeComponent();
         }

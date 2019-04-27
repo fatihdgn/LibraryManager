@@ -50,7 +50,6 @@
     <Compile Include="Entity.cs" />
     <Compile Include="JsonEntity.cs" />
     <Compile Include="Library.cs" />
-    <Compile Include="LibraryBook.cs" />
     <Compile Include="Loan.cs" />
     <Compile Include="Media.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

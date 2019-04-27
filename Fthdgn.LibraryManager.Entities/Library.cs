@@ -13,6 +13,7 @@ namespace Fthdgn.LibraryManager.Entities
         public virtual string PhoneNumber { get; set; }
         public virtual string MailAddress { get; set; }
         public virtual Media Image { get; set; }
-        public List<UserRole> UserRoles { get; set; } = new List<UserRole>();
+        public virtual List<UserRole> UserRoles { get; set; } = new List<UserRole>();
+        public virtual List<Loan> Loans { get; set; } = new List<Loan>();
     }
 }

@@ -53,9 +53,9 @@
   <ItemGroup>
     <Compile Include="DefaultValueSqlServerMigrationGenerator.cs" />
     <Compile Include="LibraryManagerDB.cs" />
-    <Compile Include="Migrations\201904232211316_InitialCreate.cs" />
-    <Compile Include="Migrations\201904232211316_InitialCreate.Designer.cs">
-      <DependentUpon>201904232211316_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201904271847538_InitialCreate.cs" />
+    <Compile Include="Migrations\201904271847538_InitialCreate.Designer.cs">
+      <DependentUpon>201904271847538_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,8 +71,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201904232211316_InitialCreate.resx">
-      <DependentUpon>201904232211316_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904271847538_InitialCreate.resx">
+      <DependentUpon>201904271847538_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

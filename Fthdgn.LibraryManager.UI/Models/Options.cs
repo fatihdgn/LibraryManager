@@ -60,8 +60,9 @@ namespace Fthdgn.LibraryManager.UI.Models
         public bool IsOptionsVisible
         {
             get => isOptionsVisible;
-            set => Set(ref isOptionsVisible, value);
+            set { Set(ref isOptionsVisible, value); RaisePropertyChanged(nameof(IsOptionsHidden)); }
         }
+        public bool IsOptionsHidden => !IsOptionsVisible;
 
         public RelayCommand ToggleOptionsCommand { get; set; }
         public void ToggleOptions() => IsOptionsVisible = !IsOptionsVisible;

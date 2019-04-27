@@ -29,5 +29,7 @@ namespace Fthdgn.LibraryManager.Managers
             yield return Loaner();
             yield return Admin();
         }
+
+        public IEnumerable<Role> Get(User user, Library library = null) => Repositories.UserRoles.Query().Where(x => x.User.Id == user.Id).As(q => library == null ? q.Where(x => x.Library.Id == null) : q.Where(x => x.Library.Id == library.Id)).Select(x => x.Role);
     }
 }
