@@ -68,9 +68,9 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             if (CurrentPage != null) pageStack.Push(CurrentPage);
             if (removeHistory) pageStack.Clear();
             var pPre = CurrentPage;
-            var vmPre = pPre.DataContext as ViewModel;
+            var vmPre = pPre?.DataContext as ViewModel;
             var pCurrent = SimpleIoc.Default.GetInstance<TPage>();
-            var vmCurrent = pCurrent.DataContext as ViewModel;
+            var vmCurrent = pCurrent?.DataContext as ViewModel;
             vmCurrent?.OnNavigating();
             vmPre?.OnNavigatingAway();
             CurrentPage = pCurrent;
@@ -94,9 +94,9 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         void GoBack()
         {
             var pPre = CurrentPage;
-            var vmPre = pPre.DataContext as ViewModel;
+            var vmPre = pPre?.DataContext as ViewModel;
             var pCurrent = pageStack.Pop();
-            var vmCurrent = pCurrent.DataContext as ViewModel;
+            var vmCurrent = pCurrent?.DataContext as ViewModel;
             vmCurrent?.OnNavigating();
             vmPre?.OnNavigatingAway();
             CurrentPage = pCurrent;
