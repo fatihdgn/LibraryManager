@@ -57,37 +57,85 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             if (AutoSelect && Items.Count(x => x.IsSelectable) == 1)
                 OnItemSelect(Items.FirstOrDefault(x => x.IsSelectable));
         }
-        
+
+        protected TaskCompletionSource<Options<T>> viewItemDialogCompletionSource;
         protected virtual bool IsItemViewable(Options<T> item) => item?.IsViewable ?? false;
         public RelayCommand<Options<T>> ViewItemCommand { get; set; }
         protected virtual void OnItemView(Options<T> item)
         {
             if (item?.IsViewable ?? false)
-                throw new NotImplementedException();
+            {
+                viewItemDialogCompletionSource?.SetResult(item);
+                viewItemDialogCompletionSource = null;
+            }
+        }
+        public Task<Options<T>> ViewItemDialogAsync()
+        {
+            if (viewItemDialogCompletionSource == null)
+                viewItemDialogCompletionSource = new TaskCompletionSource<Options<T>>();
+            return viewItemDialogCompletionSource.Task;
         }
 
+        protected TaskCompletionSource<Options<T>> editItemDialogCompletionSource;
         protected virtual bool IsItemEditable(Options<T> item) => item?.IsEditable ?? false;
         public RelayCommand<Options<T>> EditItemCommand { get; set; }
         protected virtual void OnItemEdit(Options<T> item)
         {
             if (item?.IsEditable ?? false)
-                throw new NotImplementedException();
+            {
+                editItemDialogCompletionSource?.SetResult(item);
+                editItemDialogCompletionSource = null;
+            }
+        }
+        public Task<Options<T>> EditItemDialogAsync()
+        {
+            if (editItemDialogCompletionSource == null)
+                editItemDialogCompletionSource = new TaskCompletionSource<Options<T>>();
+            return editItemDialogCompletionSource.Task;
         }
 
+        protected TaskCompletionSource<Options<T>> deleteItemDialogCompletionSource;
         protected virtual bool IsItemDeletable(Options<T> item) => item?.IsDeletable ?? false;
         public RelayCommand<Options<T>> DeleteItemCommand { get; set; }
         protected virtual void OnItemDelete(Options<T> item)
         {
             if (item?.IsDeletable ?? false)
-                throw new NotImplementedException();
+            {
+                deleteItemDialogCompletionSource?.SetResult(item);
+                deleteItemDialogCompletionSource = null;
+            }
+        }
+        public Task<Options<T>> DeleteItemDialogAsync()
+        {
+            if (deleteItemDialogCompletionSource == null)
+                deleteItemDialogCompletionSource = new TaskCompletionSource<Options<T>>();
+            return deleteItemDialogCompletionSource.Task;
         }
 
+        protected TaskCompletionSource<Options<T>> selectItemDialogCompletionSource;
         protected virtual bool IsItemSelectable(Options<T> item) => item?.IsSelectable ?? false;
         public RelayCommand<Options<T>> SelectItemCommand { get; set; }
         protected virtual void OnItemSelect(Options<T> item)
         {
-            if (item?.IsSelectable?? false)
-                throw new NotImplementedException();
+            if (item?.IsSelectable ?? false)
+            {
+                selectItemDialogCompletionSource?.SetResult(item);
+                selectItemDialogCompletionSource = null;
+            }
+        }
+        public Task<Options<T>> SelectItemDialogAsync()
+        {
+            if (selectItemDialogCompletionSource == null)
+                selectItemDialogCompletionSource = new TaskCompletionSource<Options<T>>();
+            return selectItemDialogCompletionSource.Task;
+        }
+
+        public override void OnNavigatingAway()
+        {
+            viewItemDialogCompletionSource?.SetResult(null);
+            editItemDialogCompletionSource?.SetResult(null);
+            deleteItemDialogCompletionSource?.SetResult(null);
+            selectItemDialogCompletionSource?.SetResult(null);
         }
     }
 }

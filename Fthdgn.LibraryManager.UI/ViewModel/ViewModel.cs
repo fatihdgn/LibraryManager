@@ -20,5 +20,11 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
         public RelayCommand<string> LaunchCommand { get; protected set; }
         void Launch(string item) => Process.Start(item);
+
+        public virtual void OnNavigating() { }
+        public virtual void OnNavigated() { }
+
+        public virtual void OnNavigatingAway() { }
+        public virtual void OnNavigatedAway() { }
     }
 }

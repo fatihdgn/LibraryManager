@@ -67,7 +67,15 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         {
             if (CurrentPage != null) pageStack.Push(CurrentPage);
             if (removeHistory) pageStack.Clear();
-            CurrentPage = SimpleIoc.Default.GetInstance<TPage>();
+            var pPre = CurrentPage;
+            var vmPre = pPre.DataContext as ViewModel;
+            var pCurrent = SimpleIoc.Default.GetInstance<TPage>();
+            var vmCurrent = pCurrent.DataContext as ViewModel;
+            vmCurrent?.OnNavigating();
+            vmPre?.OnNavigatingAway();
+            CurrentPage = pCurrent;
+            vmCurrent?.OnNavigated();
+            vmPre?.OnNavigatedAway();
             GoBackCommand.RaiseCanExecuteChanged();
         }
         public void GoTo(string page)
@@ -85,7 +93,15 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         bool CanGoBack() => pageStack.Any();
         void GoBack()
         {
-            CurrentPage = pageStack.Pop();
+            var pPre = CurrentPage;
+            var vmPre = pPre.DataContext as ViewModel;
+            var pCurrent = pageStack.Pop();
+            var vmCurrent = pCurrent.DataContext as ViewModel;
+            vmCurrent?.OnNavigating();
+            vmPre?.OnNavigatingAway();
+            CurrentPage = pCurrent;
+            vmCurrent?.OnNavigated();
+            vmPre?.OnNavigatedAway();
             GoBackCommand.RaiseCanExecuteChanged();
         }
     }
