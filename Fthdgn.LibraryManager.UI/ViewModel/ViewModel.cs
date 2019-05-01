@@ -11,6 +11,8 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 {
     public class ViewModel : ViewModelBase
     {
+        string name;
+        public string Name { get => name; set => Set(ref name, value); }
         public ViewModelLocator Locator { get; set; }
         public ViewModel(ViewModelLocator locator)
         {

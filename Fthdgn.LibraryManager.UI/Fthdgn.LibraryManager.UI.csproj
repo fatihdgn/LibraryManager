@@ -93,19 +93,27 @@
     <Compile Include="Extensions\SimpleIocExtensions.cs" />
     <Compile Include="Models\Options.cs" />
     <Compile Include="Models\Scopes.cs" />
+    <Compile Include="Pages\BookDetail.xaml.cs">
+      <DependentUpon>BookDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Books.xaml.cs">
+      <DependentUpon>Books.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\UserLibraries.xaml.cs">
       <DependentUpon>UserLibraries.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\BookDetailViewModel.cs" />
+    <Compile Include="ViewModel\BooksViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\ItemsViewModel.cs" />
     <Compile Include="ViewModel\UserLibrariesViewModel.cs" />
     <Compile Include="Pages\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\LibraryDetailViewModel.cs" />
+    <Compile Include="ViewModel\ItemDetailViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
@@ -122,6 +130,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\BookDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Books.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

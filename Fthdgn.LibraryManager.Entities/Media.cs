@@ -11,5 +11,6 @@ namespace Fthdgn.LibraryManager.Entities
         public virtual string Name { get; set; }
         public virtual string Uri { get; set; }
         public virtual byte[] Content { get; set; }
+        public virtual Library Library { get; set; }
     }
 }

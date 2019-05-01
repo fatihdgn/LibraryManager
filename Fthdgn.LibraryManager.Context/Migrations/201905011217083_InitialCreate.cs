@@ -42,8 +42,11 @@ namespace Fthdgn.LibraryManager.Context.Migrations
                                 },
                             }),
                         Properties_Serialized = c.String(),
+                        Library_Id = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Libraries", t => t.Library_Id)
+                .Index(t => t.Library_Id);
             
             CreateTable(
                 "dbo.Books",
@@ -83,16 +86,16 @@ namespace Fthdgn.LibraryManager.Context.Migrations
                             }),
                         Properties_Serialized = c.String(),
                         Author_Id = c.String(maxLength: 128),
-                        Image_Id = c.String(maxLength: 128),
                         Library_Id = c.String(maxLength: 128),
+                        Image_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Authors", t => t.Author_Id)
-                .ForeignKey("dbo.Media", t => t.Image_Id)
                 .ForeignKey("dbo.Libraries", t => t.Library_Id)
+                .ForeignKey("dbo.Media", t => t.Image_Id)
                 .Index(t => t.Author_Id)
-                .Index(t => t.Image_Id)
-                .Index(t => t.Library_Id);
+                .Index(t => t.Library_Id)
+                .Index(t => t.Image_Id);
             
             CreateTable(
                 "dbo.Media",
@@ -128,8 +131,11 @@ namespace Fthdgn.LibraryManager.Context.Migrations
                                 },
                             }),
                         Properties_Serialized = c.String(),
+                        Library_Id = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Libraries", t => t.Library_Id)
+                .Index(t => t.Library_Id);
             
             CreateTable(
                 "dbo.Libraries",
@@ -345,7 +351,8 @@ namespace Fthdgn.LibraryManager.Context.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.Books", "Library_Id", "dbo.Libraries");
+            DropForeignKey("dbo.Books", "Image_Id", "dbo.Media");
+            DropForeignKey("dbo.Media", "Library_Id", "dbo.Libraries");
             DropForeignKey("dbo.UserRoles", "User_Id", "dbo.Users");
             DropForeignKey("dbo.UserRoles", "Role_Id", "dbo.Roles");
             DropForeignKey("dbo.UserRoles", "Library_Id", "dbo.Libraries");
@@ -354,7 +361,8 @@ namespace Fthdgn.LibraryManager.Context.Migrations
             DropForeignKey("dbo.Loans", "Library_Id", "dbo.Libraries");
             DropForeignKey("dbo.Loans", "Book_Id", "dbo.Books");
             DropForeignKey("dbo.Libraries", "Image_Id", "dbo.Media");
-            DropForeignKey("dbo.Books", "Image_Id", "dbo.Media");
+            DropForeignKey("dbo.Books", "Library_Id", "dbo.Libraries");
+            DropForeignKey("dbo.Authors", "Library_Id", "dbo.Libraries");
             DropForeignKey("dbo.Books", "Author_Id", "dbo.Authors");
             DropIndex("dbo.UserRoles", new[] { "User_Id" });
             DropIndex("dbo.UserRoles", new[] { "Role_Id" });
@@ -364,9 +372,11 @@ namespace Fthdgn.LibraryManager.Context.Migrations
             DropIndex("dbo.Loans", new[] { "Library_Id" });
             DropIndex("dbo.Loans", new[] { "Book_Id" });
             DropIndex("dbo.Libraries", new[] { "Image_Id" });
-            DropIndex("dbo.Books", new[] { "Library_Id" });
+            DropIndex("dbo.Media", new[] { "Library_Id" });
             DropIndex("dbo.Books", new[] { "Image_Id" });
+            DropIndex("dbo.Books", new[] { "Library_Id" });
             DropIndex("dbo.Books", new[] { "Author_Id" });
+            DropIndex("dbo.Authors", new[] { "Library_Id" });
             DropTable("dbo.Roles",
                 removedColumnAnnotations: new Dictionary<string, IDictionary<string, object>>
                 {

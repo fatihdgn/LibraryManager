@@ -13,7 +13,7 @@ namespace Fthdgn.LibraryManager.Context.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201904271847538_InitialCreate"; }
+            get { return "201905011217083_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

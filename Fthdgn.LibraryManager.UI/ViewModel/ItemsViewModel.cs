@@ -20,19 +20,33 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             DeleteItemCommand = new RelayCommand<Options<T>>(OnItemDelete, IsItemDeletable);
             SelectItemCommand = new RelayCommand<Options<T>>(OnItemSelect, IsItemSelectable);
         }
+        
+        private bool autoSelect = true;
+        public bool AutoSelect
+        {
+            get => autoSelect;
+            set => Set(ref autoSelect, value);
+        }
 
         private bool canSearch;
         public bool CanSearch
         {
             get => canSearch;
-            set { Set(ref canSearch, value); }
+            set => Set(ref canSearch, value);
         }
 
-        private bool autoSelect = true;
-        public bool AutoSelect
+        private bool canCreate;
+        public bool CanCreate
         {
-            get => autoSelect;
-            set { Set(ref autoSelect, value); }
+            get => canCreate;
+            set => Set(ref canCreate, value);
+        }
+
+        private bool canSelect;
+        public bool CanSelect
+        {
+            get => canSelect;
+            set => Set(ref canSelect, value);
         }
 
         private string search;
@@ -47,7 +61,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         public IEnumerable<Options<T>> FilteredItems => string.IsNullOrEmpty(Search) ? Items : Items.Where(x => FilterItem(Search, x?.Value));
 
         protected abstract IEnumerable<T> ProvideItems();
-        protected virtual Options<T> ProvideOptions(T item) => new Options<T>(item, isSelectable: true);
+        protected virtual Options<T> ProvideOptions(T item) => new Options<T>(item, isSelectable: CanSelect);
         protected virtual void FetchItems()
         {
             Items.Clear();
@@ -58,12 +72,30 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
                 OnItemSelect(Items.FirstOrDefault(x => x.IsSelectable));
         }
 
+        protected TaskCompletionSource<bool> createItemDialogCompletionSource;
+        protected virtual bool IsItemCreatable() => CanCreate;
+        public RelayCommand CreateItemCommand { get; set; }
+        protected virtual void OnItemCreate()
+        {
+            if (CanCreate)
+            {
+                createItemDialogCompletionSource?.SetResult(true);
+                createItemDialogCompletionSource = null;
+            }
+        }
+        public Task<bool> CreateItemDialogAsync()
+        {
+            if (createItemDialogCompletionSource == null)
+                createItemDialogCompletionSource = new TaskCompletionSource<bool>();
+            return createItemDialogCompletionSource.Task;
+        }
+
         protected TaskCompletionSource<Options<T>> viewItemDialogCompletionSource;
         protected virtual bool IsItemViewable(Options<T> item) => item?.IsViewable ?? false;
         public RelayCommand<Options<T>> ViewItemCommand { get; set; }
         protected virtual void OnItemView(Options<T> item)
         {
-            if (item?.IsViewable ?? false)
+            if (IsItemViewable(item))
             {
                 viewItemDialogCompletionSource?.SetResult(item);
                 viewItemDialogCompletionSource = null;
@@ -133,9 +165,13 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         public override void OnNavigatingAway()
         {
             viewItemDialogCompletionSource?.SetResult(null);
+            viewItemDialogCompletionSource = null;
             editItemDialogCompletionSource?.SetResult(null);
+            editItemDialogCompletionSource = null;
             deleteItemDialogCompletionSource?.SetResult(null);
+            deleteItemDialogCompletionSource = null;
             selectItemDialogCompletionSource?.SetResult(null);
+            selectItemDialogCompletionSource = null;
         }
     }
 }

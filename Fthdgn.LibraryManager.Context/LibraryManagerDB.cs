@@ -29,6 +29,9 @@ namespace Fthdgn.LibraryManager.Context
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Add(new AttributeToColumnAnnotationConvention<DefaultValueAttribute, string>("SqlDefaultValue", (p, attributes) => attributes.FirstOrDefault().Value.ToString()));
+
+            modelBuilder.Entity<Library>().HasOptional(x => x.Image).WithMany();
+            modelBuilder.Entity<Library>().HasMany(x => x.Media).WithOptional(x => x.Library);
         }
     }
 }

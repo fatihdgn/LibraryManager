@@ -35,6 +35,8 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         public Library Library { get => library; set { Set(ref library, value, broadcast: true); RaisePropertyChanged(nameof(CanShowLibraryInfo)); } }
         public bool CanShowLibraryInfo => Library != null;
 
+        public string Title => $"{Name} | {(CurrentPage?.DataContext as ViewModel)?.Name}";
+
         Scopes scopes;
         public Scopes Scopes
         {
@@ -46,11 +48,15 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         public IDialogCoordinator Dialog { get; set; }
         public MainViewModel(ViewModelLocator locator) : base(locator)
         {
+            Name = "Kütüphane Yönetimi";
+            PropertyChanged += (_, e) => { if (e.PropertyName == nameof(Name)) RaisePropertyChanged(nameof(Title)); };
             Dialog = DialogCoordinator.Instance;
 
             SimpleIoc.Default.Reregister<Login>();
             SimpleIoc.Default.Reregister<UserLibraries>();
             SimpleIoc.Default.Reregister<Home>();
+            SimpleIoc.Default.Reregister<Books>();
+            SimpleIoc.Default.Reregister<BookDetail>();
 
             GoBackCommand = new RelayCommand(GoBack, CanGoBack);
             GoToCommand = new RelayCommand<string>(GoTo);
@@ -58,7 +64,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         }
 
         Page currentPage;
-        public Page CurrentPage { get => currentPage; set => Set(ref currentPage, value); }
+        public Page CurrentPage { get => currentPage; set { Set(ref currentPage, value); RaisePropertyChanged(nameof(Title)); } }
 
         Stack<Page> pageStack = new Stack<Page>();
         public RelayCommand<string> GoToCommand { get; set; }
@@ -85,6 +91,8 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
                 case nameof(Login): GoTo<Login>(); break;
                 case nameof(UserLibraries): GoTo<UserLibraries>(); break;
                 case nameof(Home): GoTo<Home>(); break;
+                case nameof(Books): GoTo<Books>(); break;
+                case nameof(BookDetail): GoTo<BookDetail>(); break;
                 default:
                     break;
             }

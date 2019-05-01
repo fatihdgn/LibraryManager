@@ -16,6 +16,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         public LibraryManagerManagers Managers { get; set; }
         public LoginViewModel(ViewModelLocator locator, LibraryManagerManagers managers) : base(locator)
         {
+            Name = "Kullanıcı Girişi";
             LoginCommand = new RelayCommand(Login, CanLogin);
             Managers = managers;
         }

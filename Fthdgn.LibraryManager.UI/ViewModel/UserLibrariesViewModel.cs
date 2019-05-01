@@ -20,12 +20,13 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
         public UserLibrariesViewModel(ViewModelLocator locator, LibraryManagerManagers managers) : base(locator)
         {
+            Name = "Kütüphaneler";
             CanSearch = true;
+            CanSelect = true;
             AutoSelect = true;
 
             Managers = managers;
-            Messenger.Default.Register<PropertyChangedMessage<User>>(this, pcm => FetchItems());
-            if (Locator.Main.User != null) FetchItems();
+            Messenger.Default.Register<PropertyChangedMessage<User>>(this, pcm => OnNavigating());
         }
 
         protected override IEnumerable<Library> ProvideItems() => Managers.Libraries.ByUser(Locator.Main.User);
@@ -36,6 +37,15 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             Locator.Main.Library = item?.Value;
             Locator.Main.Scopes = Scopes.From(Managers.Scopes.Get(Locator.Main.User, Locator.Main.Library));
             Locator.Main.GoTo<Home>(Items.Count == 1);
+        }
+
+        public override void OnNavigating()
+        {
+            if (Locator.Main.User != null)
+            {
+                FetchItems();
+                CanCreate = Scopes.From(Managers.Scopes.Get(Locator.Main.User)).Library_All;
+            }
         }
     }
 }

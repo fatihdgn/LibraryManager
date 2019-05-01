@@ -11,5 +11,6 @@ namespace Fthdgn.LibraryManager.Entities
         public string Name { get; set; }
         public string Surname { get; set; }
         public List<Book> Books { get; set; } = new List<Book>();
+        public virtual Library Library { get; set; }
     }
 }

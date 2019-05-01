@@ -45,6 +45,8 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             Register<LoginViewModel>();
             Register<UserLibrariesViewModel>();
             Register<HomeViewModel>();
+            Register<BooksViewModel>();
+            Register<BookDetailViewModel>();
         }
         
         void Register<T>() where T : class => SimpleIoc.Default.Register<T>();
@@ -54,6 +56,8 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         public LoginViewModel Login => Get<LoginViewModel>();
         public UserLibrariesViewModel UserLibraries => Get<UserLibrariesViewModel>();
         public HomeViewModel Home => Get<HomeViewModel>();
+        public BooksViewModel Books => Get<BooksViewModel>();
+        public BookDetailViewModel BookDetail => Get<BookDetailViewModel>();
 
         public static void Cleanup()
         {
