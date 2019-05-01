@@ -2,6 +2,7 @@
 using Fthdgn.LibraryManager.Extensions;
 using Fthdgn.LibraryManager.Managers;
 using Fthdgn.LibraryManager.UI.Models;
+using Fthdgn.LibraryManager.UI.Pages;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
@@ -30,10 +31,11 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         protected override Options<Book> ProvideOptions(Book item) => Locator.Main.Scopes.As(s => new Options<Book>(item, s.Book_Read, s.Book_All, s.Book_All, CanSelect));
         protected override bool FilterItem(string search, Book item) => item.Name.ToLowerInvariant().Contains(search.ToLowerInvariant());
 
-        protected override void OnItemView(Options<Book> item)
+        protected override async Task OnItemViewAsync(Options<Book> item)
         {
-            base.OnItemView(item);
-
+            await base.OnItemViewAsync(item);
+            Locator.Main.GoTo<BookDetail>();
+            await Locator.BookDetail.ViewItemAsync(item);
         }
 
         public override void OnNavigating()

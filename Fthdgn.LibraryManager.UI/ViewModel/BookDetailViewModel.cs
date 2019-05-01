@@ -11,6 +11,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
     {
         public BookDetailViewModel(ViewModelLocator locator) : base(locator)
         {
+            Name = "Kitap Detayı";
         }
     }
 }

@@ -32,8 +32,9 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         protected override IEnumerable<Library> ProvideItems() => Managers.Libraries.ByUser(Locator.Main.User);
         protected override Options<Library> ProvideOptions(Library item) => Scopes.From(Managers.Scopes.Get(Locator.Main.User, item)).As(s => new Options<Library>(item, s.Library_Read, s.Library_All, s.Library_All, true));
         protected override bool FilterItem(string search, Library item) => item.Name.ToLowerInvariant().Contains(search.ToLowerInvariant());
-        protected override void OnItemSelect(Options<Library> item)
+        protected override async Task OnItemSelectAsync(Options<Library> item)
         {
+            await base.OnItemSelectAsync(item);
             Locator.Main.Library = item?.Value;
             Locator.Main.Scopes = Scopes.From(Managers.Scopes.Get(Locator.Main.User, Locator.Main.Library));
             Locator.Main.GoTo<Home>(Items.Count == 1);
@@ -41,6 +42,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
         public override void OnNavigating()
         {
+            Locator.Main.Library = null;
             if (Locator.Main.User != null)
             {
                 FetchItems();

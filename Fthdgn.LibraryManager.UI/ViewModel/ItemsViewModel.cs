@@ -15,12 +15,13 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         public ItemsViewModel(ViewModelLocator locator) : base(locator)
         {
             Items.CollectionChanged += (_, __) => RaisePropertyChanged(nameof(FilteredItems));
-            ViewItemCommand = new RelayCommand<Options<T>>(OnItemView, IsItemViewable);
-            EditItemCommand = new RelayCommand<Options<T>>(OnItemEdit, IsItemEditable);
-            DeleteItemCommand = new RelayCommand<Options<T>>(OnItemDelete, IsItemDeletable);
-            SelectItemCommand = new RelayCommand<Options<T>>(OnItemSelect, IsItemSelectable);
+            CreateItemCommand = new RelayCommand(async () => await OnItemCreateAsync(), IsItemCreatable, keepTargetAlive: true);
+            ViewItemCommand = new RelayCommand<Options<T>>(async x => await OnItemViewAsync(x), IsItemViewable, keepTargetAlive: true);
+            EditItemCommand = new RelayCommand<Options<T>>(async x => await OnItemEditAsync(x), IsItemEditable, keepTargetAlive: true);
+            DeleteItemCommand = new RelayCommand<Options<T>>(async x => await OnItemDeleteAsync(x), IsItemDeletable, keepTargetAlive: true);
+            SelectItemCommand = new RelayCommand<Options<T>>(async x => await OnItemSelectAsync(x), IsItemSelectable, keepTargetAlive: true);
         }
-        
+
         private bool autoSelect = true;
         public bool AutoSelect
         {
@@ -69,97 +70,104 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
                 Items.Add(ProvideOptions(item));
 
             if (AutoSelect && Items.Count(x => x.IsSelectable) == 1)
-                OnItemSelect(Items.FirstOrDefault(x => x.IsSelectable));
+                OnItemSelectAsync(Items.FirstOrDefault(x => x.IsSelectable)).Wait();
         }
 
         protected TaskCompletionSource<bool> createItemDialogCompletionSource;
-        protected virtual bool IsItemCreatable() => CanCreate;
-        public RelayCommand CreateItemCommand { get; set; }
-        protected virtual void OnItemCreate()
-        {
-            if (CanCreate)
-            {
-                createItemDialogCompletionSource?.SetResult(true);
-                createItemDialogCompletionSource = null;
-            }
-        }
         public Task<bool> CreateItemDialogAsync()
         {
             if (createItemDialogCompletionSource == null)
                 createItemDialogCompletionSource = new TaskCompletionSource<bool>();
             return createItemDialogCompletionSource.Task;
         }
-
-        protected TaskCompletionSource<Options<T>> viewItemDialogCompletionSource;
-        protected virtual bool IsItemViewable(Options<T> item) => item?.IsViewable ?? false;
-        public RelayCommand<Options<T>> ViewItemCommand { get; set; }
-        protected virtual void OnItemView(Options<T> item)
+        protected virtual bool IsItemCreatable() => CanCreate;
+        public RelayCommand CreateItemCommand { get; set; }
+        protected virtual async Task OnItemCreateAsync()
         {
-            if (IsItemViewable(item))
+            await Task.Yield();
+            if (CanCreate)
             {
-                viewItemDialogCompletionSource?.SetResult(item);
-                viewItemDialogCompletionSource = null;
+                createItemDialogCompletionSource?.SetResult(true);
+                createItemDialogCompletionSource = null;
             }
         }
+
+        protected TaskCompletionSource<Options<T>> viewItemDialogCompletionSource;
         public Task<Options<T>> ViewItemDialogAsync()
         {
             if (viewItemDialogCompletionSource == null)
                 viewItemDialogCompletionSource = new TaskCompletionSource<Options<T>>();
             return viewItemDialogCompletionSource.Task;
         }
-
-        protected TaskCompletionSource<Options<T>> editItemDialogCompletionSource;
-        protected virtual bool IsItemEditable(Options<T> item) => item?.IsEditable ?? false;
-        public RelayCommand<Options<T>> EditItemCommand { get; set; }
-        protected virtual void OnItemEdit(Options<T> item)
+        protected virtual bool IsItemViewable(Options<T> item) => item?.IsViewable ?? false;
+        public RelayCommand<Options<T>> ViewItemCommand { get; set; }
+        protected virtual async Task OnItemViewAsync(Options<T> item)
         {
-            if (item?.IsEditable ?? false)
+            await Task.Yield();
+            if (IsItemViewable(item))
             {
-                editItemDialogCompletionSource?.SetResult(item);
-                editItemDialogCompletionSource = null;
+                viewItemDialogCompletionSource?.SetResult(item);
+                viewItemDialogCompletionSource = null;
             }
         }
+
+        protected TaskCompletionSource<Options<T>> editItemDialogCompletionSource;
         public Task<Options<T>> EditItemDialogAsync()
         {
             if (editItemDialogCompletionSource == null)
                 editItemDialogCompletionSource = new TaskCompletionSource<Options<T>>();
             return editItemDialogCompletionSource.Task;
         }
-
-        protected TaskCompletionSource<Options<T>> deleteItemDialogCompletionSource;
-        protected virtual bool IsItemDeletable(Options<T> item) => item?.IsDeletable ?? false;
-        public RelayCommand<Options<T>> DeleteItemCommand { get; set; }
-        protected virtual void OnItemDelete(Options<T> item)
+        protected virtual bool IsItemEditable(Options<T> item) => item?.IsEditable ?? false;
+        public RelayCommand<Options<T>> EditItemCommand { get; set; }
+        protected virtual async Task OnItemEditAsync(Options<T> item)
         {
-            if (item?.IsDeletable ?? false)
+            await Task.Yield();
+            if (item?.IsEditable ?? false)
             {
-                deleteItemDialogCompletionSource?.SetResult(item);
-                deleteItemDialogCompletionSource = null;
+                editItemDialogCompletionSource?.SetResult(item);
+                editItemDialogCompletionSource = null;
             }
         }
+
+        protected TaskCompletionSource<Options<T>> deleteItemDialogCompletionSource;
         public Task<Options<T>> DeleteItemDialogAsync()
         {
             if (deleteItemDialogCompletionSource == null)
                 deleteItemDialogCompletionSource = new TaskCompletionSource<Options<T>>();
             return deleteItemDialogCompletionSource.Task;
         }
+        protected virtual bool IsItemDeletable(Options<T> item) => item?.IsDeletable ?? false;
+        public RelayCommand<Options<T>> DeleteItemCommand { get; set; }
+        protected virtual async Task OnItemDeleteAsync(Options<T> item)
+        {
+            await Task.Yield();
+            if (item?.IsDeletable ?? false)
+            {
+                deleteItemDialogCompletionSource?.SetResult(item);
+                deleteItemDialogCompletionSource = null;
+            }
+        }
 
         protected TaskCompletionSource<Options<T>> selectItemDialogCompletionSource;
+        public Task<Options<T>> SelectItemDialogAsync()
+        {
+            CanSelect = true;
+            if (selectItemDialogCompletionSource == null)
+                selectItemDialogCompletionSource = new TaskCompletionSource<Options<T>>();
+            return selectItemDialogCompletionSource.Task;
+        }
         protected virtual bool IsItemSelectable(Options<T> item) => item?.IsSelectable ?? false;
         public RelayCommand<Options<T>> SelectItemCommand { get; set; }
-        protected virtual void OnItemSelect(Options<T> item)
+        protected virtual async Task OnItemSelectAsync(Options<T> item)
         {
+            await Task.Yield();
+            CanSelect = false;
             if (item?.IsSelectable ?? false)
             {
                 selectItemDialogCompletionSource?.SetResult(item);
                 selectItemDialogCompletionSource = null;
             }
-        }
-        public Task<Options<T>> SelectItemDialogAsync()
-        {
-            if (selectItemDialogCompletionSource == null)
-                selectItemDialogCompletionSource = new TaskCompletionSource<Options<T>>();
-            return selectItemDialogCompletionSource.Task;
         }
 
         public override void OnNavigatingAway()

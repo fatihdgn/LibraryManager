@@ -37,7 +37,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal">
-                                    <icons:PackIconMaterial Kind="Book" HorizontalAlignment="Center" Width="32" Height="32" Foreground="{DynamicResource AccentColorBrush}" />
+                                    <icons:PackIconMaterial Kind="LibraryBooks" HorizontalAlignment="Center" Width="32" Height="32" Foreground="{DynamicResource AccentColorBrush}" />
                                     <TextBlock Text="{Binding Value.Name}" Style="{DynamicResource Header}" FontFamily="Segoe UI SemiBold" VerticalAlignment="Center" Margin="5,0,0,0" />
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" Orientation="Horizontal">

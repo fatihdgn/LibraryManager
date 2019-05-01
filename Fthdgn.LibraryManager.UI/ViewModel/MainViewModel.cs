@@ -99,7 +99,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         }
         public RelayCommand GoBackCommand { get; protected set; }
         bool CanGoBack() => pageStack.Any();
-        void GoBack()
+        public void GoBack()
         {
             var pPre = CurrentPage;
             var vmPre = pPre?.DataContext as ViewModel;
