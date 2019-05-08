@@ -11,9 +11,9 @@
                 <Setter Property="HorizontalAlignment" Value="Center" />
             </Style>
             <Style x:Key="MenuItem__Text" TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="Segoe UI Bold" />
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsLight}" />
             </Style>
         </Style.Resources>
     </Style>

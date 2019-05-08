@@ -1,0 +1,7 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Fthdgn.LibraryManager.UI">
+    <FontFamily x:Key="PoppinsRegular">pack://application:,,,/Fonts/#Poppins Regular</FontFamily>
+    <FontFamily x:Key="PoppinsLight">pack://application:,,,/Fonts/#Poppins Light</FontFamily>
+    <FontFamily x:Key="PoppinsBold">pack://application:,,,/Fonts/#Poppins Bold</FontFamily>
+</ResourceDictionary>

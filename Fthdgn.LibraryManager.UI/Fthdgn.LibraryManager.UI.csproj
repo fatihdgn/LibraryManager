@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=8.1.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.8.1.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -90,7 +93,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\ObjectToVisibilityConverter.cs" />
+    <Compile Include="Converters\RelayValueConverter.cs" />
+    <Compile Include="Converters\ValueConverter.cs" />
+    <Compile Include="Extensions\OptionsExtensions.cs" />
     <Compile Include="Extensions\SimpleIocExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Mapping\LibraryManagerMapperConfiguration.cs" />
     <Compile Include="Models\Options.cs" />
     <Compile Include="Models\Scopes.cs" />
     <Compile Include="Pages\BookDetail.xaml.cs">
@@ -107,8 +116,11 @@
     </Compile>
     <Compile Include="ViewModel\BookDetailViewModel.cs" />
     <Compile Include="ViewModel\BooksViewModel.cs" />
+    <Compile Include="ViewModel\BookViewModel.cs" />
+    <Compile Include="ViewModel\EntityViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\ItemsViewModel.cs" />
+    <Compile Include="ViewModel\LibraryViewModel.cs" />
     <Compile Include="ViewModel\UserLibrariesViewModel.cs" />
     <Compile Include="Pages\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -150,11 +162,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Styles\Home.xaml">
+    <Page Include="Styles\Texts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Fonts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Colors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Buttons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Styles\Shared.xaml">
+    <Page Include="Styles\Common.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -177,6 +201,24 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\Poppins-Black.ttf" />
+    <Resource Include="Fonts\Poppins-BlackItalic.ttf" />
+    <Resource Include="Fonts\Poppins-Bold.ttf" />
+    <Resource Include="Fonts\Poppins-BoldItalic.ttf" />
+    <Resource Include="Fonts\Poppins-ExtraBold.ttf" />
+    <Resource Include="Fonts\Poppins-ExtraBoldItalic.ttf" />
+    <Resource Include="Fonts\Poppins-ExtraLight.ttf" />
+    <Resource Include="Fonts\Poppins-ExtraLightItalic.ttf" />
+    <Resource Include="Fonts\Poppins-Italic.ttf" />
+    <Resource Include="Fonts\Poppins-Light.ttf" />
+    <Resource Include="Fonts\Poppins-LightItalic.ttf" />
+    <Resource Include="Fonts\Poppins-Medium.ttf" />
+    <Resource Include="Fonts\Poppins-MediumItalic.ttf" />
+    <Resource Include="Fonts\Poppins-Regular.ttf" />
+    <Resource Include="Fonts\Poppins-SemiBold.ttf" />
+    <Resource Include="Fonts\Poppins-SemiBoldItalic.ttf" />
+    <Resource Include="Fonts\Poppins-Thin.ttf" />
+    <Resource Include="Fonts\Poppins-ThinItalic.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -184,7 +226,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fthdgn.LibraryManager.Context\Fthdgn.LibraryManager.Context.csproj">

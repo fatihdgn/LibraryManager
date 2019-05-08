@@ -35,7 +35,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         public Library Library { get => library; set { Set(ref library, value, broadcast: true); RaisePropertyChanged(nameof(CanShowLibraryInfo)); } }
         public bool CanShowLibraryInfo => Library != null;
 
-        public string Title => $"{Name} | {(CurrentPage?.DataContext as ViewModel)?.Name}";
+        public string Title => $"{DisplayName} | {(CurrentPage?.DataContext as ViewModel)?.DisplayName}";
 
         Scopes scopes;
         public Scopes Scopes
@@ -48,8 +48,9 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         public IDialogCoordinator Dialog { get; set; }
         public MainViewModel(ViewModelLocator locator) : base(locator)
         {
-            Name = "Kütüphane Yönetimi";
-            PropertyChanged += (_, e) => { if (e.PropertyName == nameof(Name)) RaisePropertyChanged(nameof(Title)); };
+            Name = nameof(MainViewModel);
+            DisplayName = "Kütüphane Yönetimi";
+            PropertyChanged += (_, e) => { if (e.PropertyName == nameof(DisplayName)) RaisePropertyChanged(nameof(Title)); };
             Dialog = DialogCoordinator.Instance;
 
             SimpleIoc.Default.Reregister<Login>();
@@ -97,6 +98,8 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
                     break;
             }
         }
+
+        public void GoTo(ViewModel viewModel) => GoTo(viewModel?.Name);
         public RelayCommand GoBackCommand { get; protected set; }
         bool CanGoBack() => pageStack.Any();
         public void GoBack()

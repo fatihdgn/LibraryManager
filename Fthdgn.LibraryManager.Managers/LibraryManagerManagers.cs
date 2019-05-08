@@ -30,6 +30,8 @@ namespace Fthdgn.LibraryManager.Managers
         public UserRoleManager UserRoles { get; set; }
         public LibraryManager Libraries { get; set; }
 
+        public void Save() => Context?.SaveChanges();
+
         public void Provide()
         {
             Roles.All().ToList();

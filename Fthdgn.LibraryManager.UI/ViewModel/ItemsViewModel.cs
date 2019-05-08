@@ -40,14 +40,14 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         public bool CanCreate
         {
             get => canCreate;
-            set => Set(ref canCreate, value);
+            set { Set(ref canCreate, value); CreateItemCommand?.RaiseCanExecuteChanged(); }
         }
 
         private bool canSelect;
         public bool CanSelect
         {
             get => canSelect;
-            set => Set(ref canSelect, value);
+            set { Set(ref canSelect, value); SelectItemCommand?.RaiseCanExecuteChanged(); }
         }
 
         private string search;
@@ -56,6 +56,10 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             get => search;
             set { Set(ref search, value); RaisePropertyChanged(nameof(FilteredItems)); }
         }
+
+
+        string createText;
+        public string CreateText { get => createText; set => Set(ref createText, value); }
 
         public ObservableCollection<Options<T>> Items { get; set; } = new ObservableCollection<Options<T>>();
         protected virtual bool FilterItem(string search, T item) => true;

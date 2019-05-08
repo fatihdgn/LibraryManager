@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Fthdgn.LibraryManager.UI.ViewModel
 {
-    public class BookDetailViewModel : ItemDetailViewModel<Book>
+    public class BookDetailViewModel : ItemDetailViewModel<BookViewModel>
     {
         public BookDetailViewModel(ViewModelLocator locator) : base(locator)
         {
-            Name = "Kitap Detayı";
+            Name = nameof(BookDetailViewModel);
+            DisplayName = "Kitap Detayı";
         }
     }
 }

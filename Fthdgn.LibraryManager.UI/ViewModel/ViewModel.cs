@@ -12,7 +12,11 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
     public class ViewModel : ViewModelBase
     {
         string name;
-        public string Name { get => name; set => Set(ref name, value); }
+        public string Name { get => name; set => Set(ref name, value?.Replace(nameof(ViewModel), string.Empty)); }
+
+        string displayName;
+        public string DisplayName { get => displayName; set => Set(ref displayName, value); }
+
         public ViewModelLocator Locator { get; set; }
         public ViewModel(ViewModelLocator locator)
         {

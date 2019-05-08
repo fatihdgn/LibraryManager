@@ -14,7 +14,8 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
     {
         public HomeViewModel(ViewModelLocator locator) : base(locator)
         {
-            Name = "Ana Sayfa";
+            Name = nameof(HomeViewModel);
+            DisplayName = "Ana Sayfa";
             Messenger.Default.Register<PropertyChangedMessage<User>>(this, pcm => RaisePropertyChanged(nameof(User)));
             Messenger.Default.Register<PropertyChangedMessage<Library>>(this, pcm => RaisePropertyChanged(nameof(Library)));
             Messenger.Default.Register<PropertyChangedMessage<Scopes>>(this, pcm => RaisePropertyChanged(nameof(Scopes)));

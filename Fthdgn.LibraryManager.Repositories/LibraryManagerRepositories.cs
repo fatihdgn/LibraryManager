@@ -29,5 +29,7 @@ namespace Fthdgn.LibraryManager.Repositories
         public LibraryManagerRepository<Media> Media { get; set; }
         
         public UserRoleRepository UserRoles { get; set; }
+
+        public void Save() => Context?.SaveChanges();
     }
 }

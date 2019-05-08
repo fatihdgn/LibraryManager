@@ -2,6 +2,7 @@
 using Fthdgn.LibraryManager.Context;
 using Fthdgn.LibraryManager.Managers;
 using Fthdgn.LibraryManager.Repositories;
+using Fthdgn.LibraryManager.UI.Mapping;
 using Fthdgn.LibraryManager.UI.ViewModel;
 using GalaSoft.MvvmLight.Ioc;
 using System;
@@ -21,6 +22,7 @@ namespace Fthdgn.LibraryManager.UI
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            LibraryManagerMapperConfiguration.Initialize();
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register(() => new LibraryManagerDB());
             SimpleIoc.Default.Register<LibraryManagerRepositories>();

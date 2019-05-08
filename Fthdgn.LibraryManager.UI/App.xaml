@@ -7,6 +7,7 @@
              d1p1:Ignorable="d" 
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:vm="clr-namespace:Fthdgn.LibraryManager.UI.ViewModel"
+             xmlns:converters="clr-namespace:Fthdgn.LibraryManager.UI.Converters"
              xmlns:pages="clr-namespace:Fthdgn.LibraryManager.UI.Pages">
     <Application.Resources>
         <ResourceDictionary>
@@ -17,10 +18,14 @@
                 <!-- Accent and AppTheme setting -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Sienna.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Fthdgn.LibraryManager.UI;component/Styles/Shared.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Fthdgn.LibraryManager.UI;component/Styles/Home.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Styles/Buttons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Styles/Texts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Styles/Common.xaml" />
                 <ResourceDictionary>
                     <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+                    <converters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

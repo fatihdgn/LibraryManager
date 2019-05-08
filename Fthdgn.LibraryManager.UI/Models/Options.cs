@@ -19,11 +19,23 @@ namespace Fthdgn.LibraryManager.UI.Models
             IsSelectable = isSelectable;
             ToggleOptionsCommand = new RelayCommand(ToggleOptions);
         }
+
+        bool isChanged = false;
+        public bool IsChanged
+        {
+            get => isChanged;
+            set => Set(ref isChanged, value);
+        }
+
         private T value;
         public T Value
         {
             get => value;
-            set => Set(ref this.value, value);
+            set
+            {
+                if (Set(ref this.value, value) && this.value is ViewModelBase)
+                    (this.value as ViewModelBase).PropertyChanged += (_, __) => IsChanged = true;
+            }
         }
 
         private bool isViewable;

@@ -20,7 +20,9 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
         public UserLibrariesViewModel(ViewModelLocator locator, LibraryManagerManagers managers) : base(locator)
         {
-            Name = "Kütüphaneler";
+            Name = nameof(UserLibrariesViewModel);
+            DisplayName = "Kütüphaneler";
+            CreateText = "Yeni Kütüphane";
             CanSearch = true;
             CanSelect = true;
             AutoSelect = true;
