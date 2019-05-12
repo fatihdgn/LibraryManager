@@ -26,6 +26,7 @@
                 <ResourceDictionary>
                     <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
                     <converters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter" />
+                    <converters:NullableDateTimeOffsetConverter x:Key="NullableDateTimeOffsetConverter" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

@@ -27,8 +27,12 @@ namespace Fthdgn.LibraryManager.Repositories
         public RoleRepository Roles { get; set; }
         public LibraryManagerRepository<Loan> Loans { get; set; }
         public LibraryManagerRepository<Media> Media { get; set; }
-        
+
         public UserRoleRepository UserRoles { get; set; }
+
+        public LibraryManagerRepository<TEntity> Repository<TEntity>()
+            where TEntity : Entity
+            => new LibraryManagerRepository<TEntity>(Context);
 
         public void Save() => Context?.SaveChanges();
     }

@@ -15,8 +15,8 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         string description;
         public string Description { get => description; set => Set(ref description, value); }
 
-        DateTime? publishedAt;
-        public DateTime? PublishedAt { get => publishedAt; set => Set(ref publishedAt, value); }
+        DateTimeOffset? publishedAt = DateTimeOffset.Now;
+        public DateTimeOffset? PublishedAt { get => publishedAt; set => Set(ref publishedAt, value); }
         
         int? pages;
         public int? Pages { get => pages; set => Set(ref pages, value); }
