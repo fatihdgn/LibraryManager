@@ -11,6 +11,8 @@ namespace Fthdgn.LibraryManager.UI.Models
 {
     public class Scopes
     {
+        public bool Any_All => Author_All || Book_All || Loan_All || User_All || Library_All;
+
         public bool Author_Read { get; set; }
         public bool Author_All { get; set; }
 

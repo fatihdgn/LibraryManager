@@ -27,56 +27,68 @@
                 <TextBlock Style="{DynamicResource Header}" Text="Ne yapmak istersiniz?" Margin="0,5,0,0" FontSize="22" HorizontalAlignment="Center" />
             </StackPanel>
             <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Button Margin="2 0">
+                    <Button Margin="2 0" Visibility="{Binding Scopes.Loan_Create, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding GoToCommand}" CommandParameter="Loan">
                         <StackPanel>
-                            <icons:PackIconOcticons Style="{DynamicResource MenuItem__Icon}" Kind="RepoPull"  />
+                            <icons:PackIconOcticons Style="{DynamicResource MenuItem__Icon}" Kind="RepoPull" />
                             <TextBlock Style="{DynamicResource MenuItem__Text}" Text="Kitap Ödünç Al" />
                         </StackPanel>
                     </Button>
-                    <Button Margin="2 0">
+                    <Button Margin="2 0" Visibility="{Binding Scopes.Loan_Create_OnBehalf, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding GoToCommand}" CommandParameter="LoanOnBehalf">
+                        <StackPanel>
+                            <icons:PackIconOcticons Style="{DynamicResource MenuItem__Icon}" Kind="RepoClone" />
+                            <TextBlock Style="{DynamicResource MenuItem__Text}" Text="Kitap Ödünç Ver" />
+                        </StackPanel>
+                    </Button>
+                    <Button Margin="2 0" Visibility="{Binding Scopes.Loan_Create, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding GoToCommand}" CommandParameter="LoanReturn">
                         <StackPanel>
                             <icons:PackIconOcticons Style="{DynamicResource MenuItem__Icon}" Kind="RepoPush"  />
                             <TextBlock Style="{DynamicResource MenuItem__Text}" Text="Kitap İade Et" />
                         </StackPanel>
                     </Button>
-                    <Button Margin="2 0">
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <!--<Button Margin="2 0" Visibility="{Binding Scopes.Any_All, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <StackPanel>
                             <icons:PackIconFontAwesome Style="{DynamicResource MenuItem__Icon}" Kind="ToolboxSolid"  />
                             <TextBlock Style="{DynamicResource MenuItem__Text}" Text="Yönetim" />
                         </StackPanel>
-                    </Button>
-                    <Button Margin="2 0">
+                    </Button>-->
+                    <Button Margin="2 0" Visibility="{Binding Scopes.Library_Read, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding GoToCommand}" CommandParameter="Libraries">
                         <StackPanel>
                             <icons:PackIconMaterial Style="{DynamicResource MenuItem__Icon}" Kind="Library"  />
                             <TextBlock Style="{DynamicResource MenuItem__Text}" Text="Kütüphaneler" />
                         </StackPanel>
                     </Button>
-                    <Button Margin="2 0">
+                    <Button Margin="2 0" Visibility="{Binding Scopes.Author_Read, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding GoToCommand}" CommandParameter="Authors">
                         <StackPanel>
                             <icons:PackIconSimpleIcons Style="{DynamicResource MenuItem__Icon}" Kind="SuperUser"  />
                             <TextBlock Style="{DynamicResource MenuItem__Text}" Text="Yazarlar" />
                         </StackPanel>
-                    </Button>   
-                    <Button Margin="2 0" Command="{Binding GoToCommand}" CommandParameter="Books">
+                    </Button>
+                    <Button Margin="2 0"  Visibility="{Binding Scopes.Book_Read, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding GoToCommand}" CommandParameter="Books">
                         <StackPanel>
                             <icons:PackIconEntypo Style="{DynamicResource MenuItem__Icon}" Kind="Book"  />
                             <TextBlock Style="{DynamicResource MenuItem__Text}" Text="Kitaplar" />
                         </StackPanel>
                     </Button>
-                    <Button Margin="2 0">
+                    <Button Margin="2 0"  Visibility="{Binding Scopes.User_Read, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding GoToCommand}" CommandParameter="Users">
                         <StackPanel>
                             <icons:PackIconMaterial Style="{DynamicResource MenuItem__Icon}" Kind="Account" />
                             <TextBlock Style="{DynamicResource MenuItem__Text}" Text="Kullanıcılar" />
                         </StackPanel>
                     </Button>
-                    <Button Margin="2 0">
+                    <Button Margin="2 0"  Visibility="{Binding Scopes.Role_Read, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding GoToCommand}" CommandParameter="Roles">
                         <StackPanel>
                             <icons:PackIconMaterial Style="{DynamicResource MenuItem__Icon}" Kind="Security"  />
                             <TextBlock Style="{DynamicResource MenuItem__Text}" Text="Roller" />
                         </StackPanel>
                     </Button>
-                    
+
                 </StackPanel>
             </Grid>
         </Grid>

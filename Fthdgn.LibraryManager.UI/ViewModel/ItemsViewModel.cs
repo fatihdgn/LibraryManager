@@ -174,16 +174,20 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             }
         }
 
-        public override void OnNavigatingAway()
+        public override void OnNavigatingAway(string to = null)
         {
-            viewItemDialogCompletionSource?.SetResult(null);
-            viewItemDialogCompletionSource = null;
-            editItemDialogCompletionSource?.SetResult(null);
-            editItemDialogCompletionSource = null;
-            deleteItemDialogCompletionSource?.SetResult(null);
-            deleteItemDialogCompletionSource = null;
-            selectItemDialogCompletionSource?.SetResult(null);
-            selectItemDialogCompletionSource = null;
+            if (!CanSelect)
+            {
+                viewItemDialogCompletionSource?.SetResult(null);
+                viewItemDialogCompletionSource = null;
+                editItemDialogCompletionSource?.SetResult(null);
+                editItemDialogCompletionSource = null;
+                deleteItemDialogCompletionSource?.SetResult(null);
+                deleteItemDialogCompletionSource = null;
+                selectItemDialogCompletionSource?.SetResult(null);
+                selectItemDialogCompletionSource = null;
+
+            }
         }
     }
 }

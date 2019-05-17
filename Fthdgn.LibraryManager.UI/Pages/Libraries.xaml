@@ -1,4 +1,4 @@
-﻿<Page x:Class="Fthdgn.LibraryManager.UI.Pages.Books"
+﻿<Page x:Class="Fthdgn.LibraryManager.UI.Pages.Libraries"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,8 +8,8 @@
       d:DesignHeight="450" d:DesignWidth="800"
       xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
       xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
-      DataContext="{Binding Source={StaticResource Locator}, Path=Books}"
-      Title="Books">
+      DataContext="{Binding Source={StaticResource Locator}, Path=Libraries}"
+      Title="Libraries">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -41,11 +41,10 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <StackPanel Orientation="Horizontal">
-                                        <icons:PackIconMaterial Kind="LibraryBooks" HorizontalAlignment="Center" Width="32" Height="32" Foreground="{DynamicResource AccentColorBrush}" />
-                                        <TextBlock Text="{Binding Value.Name}" Style="{DynamicResource Header}" VerticalAlignment="Center" Margin="5,0,0,0" />
+                                        <icons:PackIconMaterial Kind="Library" HorizontalAlignment="Center" Width="32" Height="32" Foreground="{DynamicResource AccentColorBrush}" />
+                                        <TextBlock Text="{Binding Value.Name}" Style="{DynamicResource Header}" FontFamily="{StaticResource PoppinsRegular}" VerticalAlignment="Center" Margin="5,0,0,0"  />
                                     </StackPanel>
                                     <StackPanel Grid.Column="1" Orientation="Horizontal">
-
                                         <StackPanel Orientation="Horizontal" Visibility="{Binding IsOptionsAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
                                             <StackPanel Orientation="Horizontal" Visibility="{Binding IsOptionsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                                                 <Button Margin="2 0" Visibility="{Binding IsViewable, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding DataContext.ViewItemCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}" CommandParameter="{Binding}">
@@ -69,27 +68,12 @@
                                             <icons:PackIconMaterial Kind="ArrowRightThick" HorizontalAlignment="Center" Width="16" Height="16" />
                                         </Button>
                                     </StackPanel>
-
-                                    <!--<Button HorizontalAlignment="Left" Margin="5,0,5,3" Command="{Binding DataContext.SelectLibraryCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter="{Binding}">
-                                <StackPanel Orientation="Vertical">
-                                </StackPanel>
-                            </Button>-->
                                 </Grid>
-
                             </Border>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
-            
-            <!--<Button HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Button.Content>
-                    <StackPanel>
-                        <icons:PackIconMaterial Kind="Library" Width="64" Height="64" HorizontalAlignment="Center" />
-                        <TextBlock Text="Kütüphaneler" FontFamily="Segoe UI Bold" FontSize="20" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Button.Content>
-            </Button>-->
         </Grid>
     </Grid>
 </Page>

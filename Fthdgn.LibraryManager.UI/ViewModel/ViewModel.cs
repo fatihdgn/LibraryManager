@@ -30,7 +30,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         public virtual void OnNavigating() { }
         public virtual void OnNavigated() { }
 
-        public virtual void OnNavigatingAway() { }
-        public virtual void OnNavigatedAway() { }
+        public virtual void OnNavigatingAway(string to = null) { }
+        public virtual void OnNavigatedAway(string to = null) { }
     }
 }

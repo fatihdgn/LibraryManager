@@ -40,10 +40,10 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         public RelayCommand LoginCommand { get; set; }
         public void Login()
         {
-            if(Managers.Users.Verify(Username, Password))
+            if (Managers.Users.Verify(Username, Password))
             {
                 Locator.Main.User = Managers.Repositories.Users.GetByUsernameOrMailAddress(Username);
-                Locator.Main.GoTo<UserLibraries>(removeHistory: true);
+                Locator.Main.GoTo<UserLibraries>();
             }
         }
     }

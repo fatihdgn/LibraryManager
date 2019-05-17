@@ -25,8 +25,18 @@ namespace Fthdgn.LibraryManager.UI.Mapping
                   .ForMember(x => x.CreatedAt, o => o.Ignore())
                   .ForMember(x => x.ChangedAt, o => o.Ignore())
                   .ForMember(x => x.RemovedAt, o => o.Ignore());
+
             config.CreateMap<Book, BookViewModel>().IncludeBase<Entity, EntityViewModel>();
             config.CreateMap<BookViewModel, Book>().IncludeBase<EntityViewModel, Entity>();
+
+            config.CreateMap<Author, AuthorViewModel>().IncludeBase<Entity, EntityViewModel>();
+            config.CreateMap<AuthorViewModel, Author>().IncludeBase<EntityViewModel, Entity>();
+
+            config.CreateMap<Library, LibraryViewModel>().IncludeBase<Entity, EntityViewModel>();
+            config.CreateMap<LibraryViewModel, Library>().IncludeBase<EntityViewModel, Entity>();
+
+            config.CreateMap<User, UserViewModel>().IncludeBase<Entity, EntityViewModel>();
+            config.CreateMap<UserViewModel, User>().IncludeBase<EntityViewModel, Entity>();
         }
     }
 }

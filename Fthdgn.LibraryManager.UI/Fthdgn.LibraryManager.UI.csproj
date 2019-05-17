@@ -104,8 +104,23 @@
     <Compile Include="Mapping\LibraryManagerMapperConfiguration.cs" />
     <Compile Include="Models\Options.cs" />
     <Compile Include="Models\Scopes.cs" />
+    <Compile Include="Pages\AuthorDetail.xaml.cs">
+      <DependentUpon>AuthorDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UserDetail.xaml.cs">
+      <DependentUpon>UserDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Users.xaml.cs">
+      <DependentUpon>Users.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LibraryDetail.xaml.cs">
+      <DependentUpon>LibraryDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BookDetail.xaml.cs">
       <DependentUpon>BookDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Authors.xaml.cs">
+      <DependentUpon>Authors.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Books.xaml.cs">
       <DependentUpon>Books.xaml</DependentUpon>
@@ -113,16 +128,28 @@
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Libraries.xaml.cs">
+      <DependentUpon>Libraries.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\UserLibraries.xaml.cs">
       <DependentUpon>UserLibraries.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\BookDetailViewModel.cs" />
-    <Compile Include="ViewModel\BooksViewModel.cs" />
-    <Compile Include="ViewModel\BookViewModel.cs" />
+    <Compile Include="ViewModel\Author\AuthorDetailViewModel.cs" />
+    <Compile Include="ViewModel\Author\AuthorsViewModel.cs" />
+    <Compile Include="ViewModel\Author\AuthorViewModel.cs" />
+    <Compile Include="ViewModel\User\UsersViewModel.cs" />
+    <Compile Include="ViewModel\User\UserDetailViewModel.cs" />
+    <Compile Include="ViewModel\User\UserViewModel.cs" />
+    <Compile Include="ViewModel\Library\LibraryDetailViewModel.cs" />
+    <Compile Include="ViewModel\Library\LibrariesViewModel.cs" />
+    <Compile Include="ViewModel\Library\LibraryViewModel.cs" />
+    <Compile Include="ViewModel\Book\BookDetailViewModel.cs" />
+    <Compile Include="ViewModel\Book\BooksViewModel.cs" />
+    <Compile Include="ViewModel\Book\BookViewModel.cs" />
+    <Compile Include="ViewModel\DetailedItemsViewModel.cs" />
     <Compile Include="ViewModel\EntityViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\ItemsViewModel.cs" />
-    <Compile Include="ViewModel\LibraryViewModel.cs" />
     <Compile Include="ViewModel\UserLibrariesViewModel.cs" />
     <Compile Include="Pages\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -144,9 +171,29 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\AuthorDetail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\UserDetail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Users.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\LibraryDetail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\BookDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Authors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Books.xaml">
       <SubType>Designer</SubType>
@@ -155,6 +202,10 @@
     <Page Include="Pages\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Libraries.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\UserLibraries.xaml">
       <SubType>Designer</SubType>

@@ -14,11 +14,11 @@ using System.Threading.Tasks;
 
 namespace Fthdgn.LibraryManager.UI.ViewModel
 {
-    public class UserLibrariesViewModel : ItemsViewModel<Library>
+    public class UserLibrariesViewModel : DetailedItemsViewModel<Library, LibraryViewModel, LibraryDetailViewModel>
     {
         public LibraryManagerManagers Managers { get; set; }
 
-        public UserLibrariesViewModel(ViewModelLocator locator, LibraryManagerManagers managers) : base(locator)
+        public UserLibrariesViewModel(ViewModelLocator locator, LibraryDetailViewModel detailViewModel, LibraryManagerManagers managers) : base(locator, detailViewModel, managers)
         {
             Name = nameof(UserLibrariesViewModel);
             DisplayName = "Kütüphaneler";
@@ -50,6 +50,13 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
                 FetchItems();
                 CanCreate = Scopes.From(Managers.Scopes.Get(Locator.Main.User)).Library_All;
             }
+        }
+
+        public override void OnNavigatingAway(string to = null)
+        {
+            base.OnNavigatingAway(to);
+            if (to == nameof(Login))
+                Locator.Main.User = null;
         }
     }
 }

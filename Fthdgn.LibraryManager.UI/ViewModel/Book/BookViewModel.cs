@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Fthdgn.LibraryManager.Entities;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,10 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
         string description;
         public string Description { get => description; set => Set(ref description, value); }
+
+
+        Author author;
+        public Author Author { get => author; set => Set(ref author, value); }
 
         DateTimeOffset? publishedAt = DateTimeOffset.Now;
         public DateTimeOffset? PublishedAt { get => publishedAt; set => Set(ref publishedAt, value); }

@@ -31,6 +31,13 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         public User User { get => user; set { Set(ref user, value, broadcast: true); RaisePropertyChanged(nameof(CanShowUserInfo)); } }
         public bool CanShowUserInfo => User != null;
 
+        public void ResetUser()
+        {
+            user = null;
+            RaisePropertyChanged(nameof(User));
+            RaisePropertyChanged(nameof(CanShowUserInfo));
+        }
+
         Library library;
         public Library Library { get => library; set { Set(ref library, value, broadcast: true); RaisePropertyChanged(nameof(CanShowLibraryInfo)); } }
         public bool CanShowLibraryInfo => Library != null;
@@ -56,8 +63,18 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             SimpleIoc.Default.Reregister<Login>();
             SimpleIoc.Default.Reregister<UserLibraries>();
             SimpleIoc.Default.Reregister<Home>();
+
             SimpleIoc.Default.Reregister<Books>();
             SimpleIoc.Default.Reregister<BookDetail>();
+
+            SimpleIoc.Default.Reregister<Authors>();
+            SimpleIoc.Default.Reregister<AuthorDetail>();
+
+            SimpleIoc.Default.Reregister<Libraries>();
+            SimpleIoc.Default.Reregister<LibraryDetail>();
+
+            SimpleIoc.Default.Reregister<Users>();
+            SimpleIoc.Default.Reregister<UserDetail>();
 
             GoBackCommand = new RelayCommand(GoBack, CanGoBack);
             GoToCommand = new RelayCommand<string>(GoTo);
@@ -79,10 +96,10 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             var pCurrent = SimpleIoc.Default.GetInstance<TPage>();
             var vmCurrent = pCurrent?.DataContext as ViewModel;
             vmCurrent?.OnNavigating();
-            vmPre?.OnNavigatingAway();
+            vmPre?.OnNavigatingAway(vmCurrent?.Name);
             CurrentPage = pCurrent;
             vmCurrent?.OnNavigated();
-            vmPre?.OnNavigatedAway();
+            vmPre?.OnNavigatedAway(vmCurrent?.Name);
             GoBackCommand.RaiseCanExecuteChanged();
         }
         public void GoTo(string page)
@@ -92,8 +109,18 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
                 case nameof(Login): GoTo<Login>(); break;
                 case nameof(UserLibraries): GoTo<UserLibraries>(); break;
                 case nameof(Home): GoTo<Home>(); break;
+
                 case nameof(Books): GoTo<Books>(); break;
                 case nameof(BookDetail): GoTo<BookDetail>(); break;
+
+                case nameof(Authors): GoTo<Authors>(); break;
+                case nameof(AuthorDetail): GoTo<AuthorDetail>(); break;
+
+                case nameof(Libraries): GoTo<Libraries>(); break;
+                case nameof(LibraryDetail): GoTo<LibraryDetail>(); break;
+
+                case nameof(Users): GoTo<Users>(); break;
+                case nameof(UserDetail): GoTo<UserDetail>(); break;
                 default:
                     break;
             }
@@ -109,10 +136,10 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             var pCurrent = pageStack.Pop();
             var vmCurrent = pCurrent?.DataContext as ViewModel;
             vmCurrent?.OnNavigating();
-            vmPre?.OnNavigatingAway();
+            vmPre?.OnNavigatingAway(vmCurrent?.Name);
             CurrentPage = pCurrent;
             vmCurrent?.OnNavigated();
-            vmPre?.OnNavigatedAway();
+            vmPre?.OnNavigatedAway(vmCurrent?.Name);
             GoBackCommand.RaiseCanExecuteChanged();
         }
     }

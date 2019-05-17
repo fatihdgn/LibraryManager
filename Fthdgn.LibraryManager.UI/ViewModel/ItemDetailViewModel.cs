@@ -27,7 +27,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             get => item;
             set => Set(ref item, value);
         }
-        
+
         Decision decision;
         public Decision Decision { get => decision; set => Set(ref decision, value); }
 
@@ -93,30 +93,30 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             Decision = Decision.None;
         }
 
-        public override void OnNavigatingAway()
+        public override void OnNavigatingAway(string to = null)
         {
             Item.IsChanged = Decision == Decision.Yes;
             switch (Mode)
-            {
+            { 
                 case DetailMode.View:
                     viewItemDialogCompletionSource?.SetResult(Item);
+                    viewItemDialogCompletionSource = null;
                     break;
                 case DetailMode.Create:
                     createItemDialogCompletionSource?.SetResult(Item);
+                    createItemDialogCompletionSource = null;
                     break;
                 case DetailMode.Edit:
                     editItemDialogCompletionSource?.SetResult(Item);
+                    editItemDialogCompletionSource = null;
                     break;
                 case DetailMode.Delete:
                     deleteItemDialogCompletionSource?.SetResult(Item);
+                    deleteItemDialogCompletionSource = null;
                     break;
                 default:
                     break;
             }
-            viewItemDialogCompletionSource = null;
-            createItemDialogCompletionSource = null;
-            editItemDialogCompletionSource = null;
-            deleteItemDialogCompletionSource = null;
         }
 
 
@@ -124,6 +124,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
     public enum DetailMode
     {
+        Select,
         View,
         Create,
         Edit,

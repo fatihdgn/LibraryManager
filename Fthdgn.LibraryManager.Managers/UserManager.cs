@@ -17,7 +17,7 @@ namespace Fthdgn.LibraryManager.Managers
         
         public User Provide(string username, Func<string, User> provider) => Repositories.Users.GetByUsernameOrMailAddress(username) ?? Context.Users.Add(provider?.Invoke(username)?.With(ResolvePassword)).With(x => Context.SaveChanges());
 
-        void ResolvePassword(User user)
+        public void ResolvePassword(User user)
         {
             if (user != null && !string.IsNullOrEmpty(user.PasswordHash) && !SecurePasswordHasher.Default.IsHashSupported(user.PasswordHash))
                 user.PasswordHash = SecurePasswordHasher.Default.Hash(user.PasswordHash);
