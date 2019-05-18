@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
 using Fthdgn.LibraryManager.Entities;
+using Fthdgn.LibraryManager.UI.Caching;
 using Fthdgn.LibraryManager.UI.Extensions;
 using Fthdgn.LibraryManager.UI.Models;
 using Fthdgn.LibraryManager.UI.Pages;
@@ -53,7 +54,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
 
         public IDialogCoordinator Dialog { get; set; }
-        public MainViewModel(ViewModelLocator locator) : base(locator)
+        public MainViewModel(ViewModelLocator locator, CredentialCacheFile cache) : base(locator)
         {
             Name = nameof(MainViewModel);
             DisplayName = "Kütüphane Yönetimi";
@@ -78,6 +79,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
             GoBackCommand = new RelayCommand(GoBack, CanGoBack);
             GoToCommand = new RelayCommand<string>(GoTo);
+            
             GoTo<Login>();
         }
 

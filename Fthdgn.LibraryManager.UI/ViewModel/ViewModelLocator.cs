@@ -14,9 +14,11 @@
 
 using CommonServiceLocator;
 using Fthdgn.LibraryManager.Context;
+using Fthdgn.LibraryManager.UI.Caching;
 using Fthdgn.LibraryManager.UI.Extensions;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using System;
 
 namespace Fthdgn.LibraryManager.UI.ViewModel
 {
@@ -57,8 +59,12 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             Register<UsersViewModel>();
             Register<UserDetailViewModel>();
         }
-        
-        void Register<T>() where T : class => SimpleIoc.Default.Register<T>();
+
+        void Register<T>(Func<T> factory = null) where T : class
+        {
+            if (factory != null) SimpleIoc.Default.Register<T>(factory);
+            else SimpleIoc.Default.Register<T>();
+        }
         T Get<T>() => ServiceLocator.Current.GetInstance<T>();
 
         public MainViewModel Main => Get<MainViewModel>();

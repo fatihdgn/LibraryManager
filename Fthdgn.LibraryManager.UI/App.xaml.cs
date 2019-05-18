@@ -2,6 +2,7 @@
 using Fthdgn.LibraryManager.Context;
 using Fthdgn.LibraryManager.Managers;
 using Fthdgn.LibraryManager.Repositories;
+using Fthdgn.LibraryManager.UI.Caching;
 using Fthdgn.LibraryManager.UI.Mapping;
 using Fthdgn.LibraryManager.UI.ViewModel;
 using GalaSoft.MvvmLight.Ioc;
@@ -28,6 +29,7 @@ namespace Fthdgn.LibraryManager.UI
             SimpleIoc.Default.Register<LibraryManagerRepositories>();
             SimpleIoc.Default.Register<LibraryManagerManagers>();
             SimpleIoc.Default.GetInstance<LibraryManagerManagers>().Provide();
+            SimpleIoc.Default.Register(() => new CredentialCacheFile("cache.dat"));
             SimpleIoc.Default.Register<ViewModelLocator>(true);
             base.OnStartup(e);
         }
