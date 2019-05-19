@@ -32,7 +32,7 @@
                     <icons:PackIconMaterial Grid.Column="1" Kind="Lock"  Width="32" Height="32" Foreground="{DynamicResource ForegroundColorBrush}" />
                 </Grid>
                 <TextBox Text="{Binding Username}"  Margin="0 0 0 5" mah:TextBoxHelper.Watermark="Kullanıcı adı ya da mail adresi" mah:TextBoxHelper.UseFloatingWatermark="True" FontFamily="{StaticResource PoppinsLight}"></TextBox>
-                <PasswordBox Margin="0 0 0 5" mah:TextBoxHelper.Watermark="Şifre" mah:TextBoxHelper.UseFloatingWatermark="True" PasswordChanged="PasswordBox_PasswordChanged" FontFamily="{StaticResource PoppinsLight}"></PasswordBox>
+                <PasswordBox x:Name="pbPassword" Margin="0 0 0 5" mah:TextBoxHelper.Watermark="Şifre" mah:TextBoxHelper.UseFloatingWatermark="True" PasswordChanged="PasswordBox_PasswordChanged" FontFamily="{StaticResource PoppinsLight}"></PasswordBox>
                 <CheckBox Margin="0 0 0 5" IsChecked="{Binding RememberMe, UpdateSourceTrigger=PropertyChanged}" FontFamily="{StaticResource PoppinsLight}">Beni hatırla</CheckBox>
                 <Button Content="Giriş Yap" Command="{Binding LoginCommand}" FontFamily="{StaticResource PoppinsLight}"></Button>
             </StackPanel>

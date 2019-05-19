@@ -24,6 +24,8 @@ namespace Fthdgn.LibraryManager.UI.Pages
         public Login()
         {
             InitializeComponent();
+            if (DataContext is LoginViewModel)
+                pbPassword.Password = ((LoginViewModel)DataContext).Password;
         }
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)

@@ -37,6 +37,9 @@ namespace Fthdgn.LibraryManager.UI.Mapping
 
             config.CreateMap<User, UserViewModel>().IncludeBase<Entity, EntityViewModel>();
             config.CreateMap<UserViewModel, User>().IncludeBase<EntityViewModel, Entity>();
+
+            config.CreateMap<Loan, LoanViewModel>().IncludeBase<Entity, EntityViewModel>();
+            config.CreateMap<LoanViewModel, Loan>().IncludeBase<EntityViewModel, Entity>();
         }
     }
 }

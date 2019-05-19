@@ -115,6 +115,12 @@
     <Compile Include="Pages\AuthorDetail.xaml.cs">
       <DependentUpon>AuthorDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\LoanOnBehalf.xaml.cs">
+      <DependentUpon>LoanOnBehalf.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LoanCreate.xaml.cs">
+      <DependentUpon>LoanCreate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\UserDetail.xaml.cs">
       <DependentUpon>UserDetail.xaml</DependentUpon>
     </Compile>
@@ -145,6 +151,10 @@
     <Compile Include="ViewModel\Author\AuthorDetailViewModel.cs" />
     <Compile Include="ViewModel\Author\AuthorsViewModel.cs" />
     <Compile Include="ViewModel\Author\AuthorViewModel.cs" />
+    <Compile Include="ViewModel\Loan\LoansViewModel.cs" />
+    <Compile Include="ViewModel\Loan\LoanOnBehalfViewModel.cs" />
+    <Compile Include="ViewModel\Loan\LoanViewModel.cs" />
+    <Compile Include="ViewModel\Loan\LoanCreateViewModel.cs" />
     <Compile Include="ViewModel\User\UsersViewModel.cs" />
     <Compile Include="ViewModel\User\UserDetailViewModel.cs" />
     <Compile Include="ViewModel\User\UserViewModel.cs" />
@@ -180,6 +190,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\AuthorDetail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\LoanOnBehalf.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\LoanCreate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

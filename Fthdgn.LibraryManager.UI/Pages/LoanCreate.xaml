@@ -1,0 +1,104 @@
+﻿<Page x:Class="Fthdgn.LibraryManager.UI.Pages.LoanCreate"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Fthdgn.LibraryManager.UI.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      DataContext="{Binding Source={StaticResource Locator}, Path=LoanCreate}"
+      Title="BookDetail">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <icons:PackIconOcticons Kind="RepoPull" HorizontalAlignment="Center" Width="32" Height="32" Foreground="{DynamicResource AccentColorBrush}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="0" Margin="10,0,0,0" Text="Kitap Ödünç Al" Style="{DynamicResource Header}" FontSize="25" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button  Command="{Binding YesCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <icons:PackIconMaterial Kind="Check" HorizontalAlignment="Center" Width="16" Height="16" VerticalAlignment="Center" />
+                        <TextBlock Margin="5,0,0,0" Text="Kaydet" FontFamily="{StaticResource PoppinsLight}" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <ScrollViewer Grid.Row="1" Margin="10, 0" VerticalScrollBarVisibility="Auto" Visibility="{Binding Mode, Converter={StaticResource ObjectToVisibilityConverter}, ConverterParameter='View | Create | Edit'}">
+            <ScrollViewer.Content>
+                <StackPanel>
+                    <!-- Book -->
+                    <Grid Margin="0 2">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="Kitap" Style="{StaticResource Header}" FontSize="16" />
+                                    <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
+                                        <TextBlock Text="{Binding Item.Value.Book.Name, FallbackValue='Kitap Seçilmemiş'}" FontFamily="{StaticResource PoppinsLight}" FontSize="15" ></TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                                <Button Grid.Column="1" Margin="2 0" Command="{Binding SelectBookCommand}">
+                                    <icons:PackIconMaterial Kind="ArrowRightThick" HorizontalAlignment="Center" Width="16" Height="16" />
+                                </Button>
+                            </Grid>
+                        </StackPanel>
+                        <!--<StackPanel Visibility="{Binding Mode, Converter={StaticResource ObjectToVisibilityConverter}, ConverterParameter='Create | Edit'}">
+                            <ComboBox ItemsSource="{Binding Authors}" SelectedItem="{Binding Item.Value.Author}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Name}" FontFamily="{StaticResource PoppinsLight}" FontSize="13"></TextBlock>
+                                            <TextBlock Text="{Binding Surname}" FontFamily="{StaticResource PoppinsLight}" FontSize="13"  Margin="5,0,0,0"></TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            -->
+                        <!--<TextBox Text="{Binding Item.Value.Description}" mah:TextBoxHelper.Watermark="Açıklama" mah:TextBoxHelper.UseFloatingWatermark="True" FontFamily="{StaticResource PoppinsLight}" ></TextBox>-->
+                        <!--
+                        </StackPanel>-->
+                    </Grid>
+                    <!-- Published At -->
+                    <Grid Margin="0 2">
+                        <StackPanel>
+                            <TextBlock Text="Geri getirme tarihi" Style="{StaticResource Header}" FontSize="16" />
+                            <DatePicker DataContext="{Binding Item.Value.ReturnsAt, Converter={StaticResource NullableDateTimeOffsetConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontFamily="{StaticResource PoppinsLight}" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer.Content>
+        </ScrollViewer>
+        <Grid Grid.Row="1" Visibility="{Binding Mode, Converter={StaticResource ObjectToVisibilityConverter}, ConverterParameter='Delete'}">
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid>
+                    <TextBlock Text="Bu kaydı silmek istiyor musunuz?" Style="{StaticResource Header}" FontSize="20" />
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Evet" Margin="5" Command="{Binding YesCommand}" />
+                    <Button Grid.Column="1" Content="Hayır"  Margin="5" Command="{Binding NoCommand}" />
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
