@@ -115,6 +115,18 @@
     <Compile Include="Pages\AuthorDetail.xaml.cs">
       <DependentUpon>AuthorDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\LoanReturnOnBehalfDetail.xaml.cs">
+      <DependentUpon>LoanReturnOnBehalfDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LoanReturnOnBehalf.xaml.cs">
+      <DependentUpon>LoanReturnOnBehalf.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LoanReturnDetail.xaml.cs">
+      <DependentUpon>LoanReturnDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LoanReturn.xaml.cs">
+      <DependentUpon>LoanReturn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LoanOnBehalf.xaml.cs">
       <DependentUpon>LoanOnBehalf.xaml</DependentUpon>
     </Compile>
@@ -151,6 +163,9 @@
     <Compile Include="ViewModel\Author\AuthorDetailViewModel.cs" />
     <Compile Include="ViewModel\Author\AuthorsViewModel.cs" />
     <Compile Include="ViewModel\Author\AuthorViewModel.cs" />
+    <Compile Include="ViewModel\Loan\LoanReturnDetailViewModel.cs" />
+    <Compile Include="ViewModel\Loan\LoanReturnOnBehalfViewModel.cs" />
+    <Compile Include="ViewModel\Loan\LoanReturnViewModel.cs" />
     <Compile Include="ViewModel\Loan\LoansViewModel.cs" />
     <Compile Include="ViewModel\Loan\LoanOnBehalfViewModel.cs" />
     <Compile Include="ViewModel\Loan\LoanViewModel.cs" />
@@ -190,6 +205,22 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\AuthorDetail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\LoanReturnOnBehalfDetail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\LoanReturnOnBehalf.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\LoanReturnDetail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\LoanReturn.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

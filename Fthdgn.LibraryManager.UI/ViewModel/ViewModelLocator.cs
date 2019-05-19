@@ -61,6 +61,11 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
             Register<LoanCreateViewModel>();
             Register<LoanOnBehalfViewModel>();
+
+            Register<LoanReturnViewModel>();
+            Register<LoanReturnDetailViewModel>();
+
+            Register<LoanReturnOnBehalfViewModel>();
         }
 
         void Register<T>(Func<T> factory = null) where T : class
@@ -89,6 +94,11 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
         public LoanCreateViewModel LoanCreate => Get<LoanCreateViewModel>();
         public LoanOnBehalfViewModel LoanOnBehalf => Get<LoanOnBehalfViewModel>();
+
+        public LoanReturnViewModel LoanReturn => Get<LoanReturnViewModel>();
+        public LoanReturnDetailViewModel LoanReturnDetail => Get<LoanReturnDetailViewModel>();
+
+        public LoanReturnOnBehalfViewModel LoanReturnOnBehalf => Get<LoanReturnOnBehalfViewModel>();
 
         public static void Cleanup()
         {

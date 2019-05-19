@@ -16,8 +16,6 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 {
     public class UserLibrariesViewModel : DetailedItemsViewModel<Library, LibraryViewModel, LibraryDetailViewModel>
     {
-        public LibraryManagerManagers Managers { get; set; }
-
         public UserLibrariesViewModel(ViewModelLocator locator, LibraryDetailViewModel detailViewModel, LibraryManagerManagers managers) : base(locator, detailViewModel, managers)
         {
             Name = nameof(UserLibrariesViewModel);

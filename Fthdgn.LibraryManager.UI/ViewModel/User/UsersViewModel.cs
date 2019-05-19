@@ -37,10 +37,15 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         protected override User Map(UserViewModel item, User model = null)
         {
             var map = base.Map(item, model);
-            if(item.Password != null)
+            if (item.Password != null)
             {
                 map.PasswordHash = item.Password;
                 Managers.Users.ResolvePassword(map);
+            }
+            if (!Managers.Repositories.UserRoles.Query().Any(x => x.User.Id == map.Id))
+            {
+                Managers.Repositories.UserRoles.Add(new UserRole { User = map, Role = Managers.Roles.Customer() });
+                Managers.Save();
             }
             //if (map.Library == null) map.Library = Locator.Main.Library;
             //if (item.Author?.Id != null)
