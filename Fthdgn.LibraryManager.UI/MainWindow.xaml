@@ -31,16 +31,22 @@
     </mah:MetroWindow.LeftWindowCommands>
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
+            <Button Visibility="{Binding CanShowLibraryInfo, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Text="{Binding Library.Name}" />
+                    <icons:PackIconMaterial Kind="Library" Margin="5 0 0 0" />
+                </StackPanel>
+            </Button>
             <Button Visibility="{Binding CanShowUserInfo, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock VerticalAlignment="Center" Text="{Binding User.Username}" />
                     <icons:PackIconMaterial Kind="Account" Margin="5 0 0 0" />
                 </StackPanel>
             </Button>
-            <Button Visibility="{Binding CanShowLibraryInfo, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Button Visibility="{Binding CanShowUserInfo, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding LogoutCommand}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock VerticalAlignment="Center" Text="{Binding Library.Name}" />
-                    <icons:PackIconMaterial Kind="Library" Margin="5 0 0 0" />
+                    <TextBlock VerticalAlignment="Center" Text="Çıkış Yap" />
+                    <icons:PackIconMaterial Kind="ExitRun" Margin="5 0 0 0" />
                 </StackPanel>
             </Button>
         </mah:WindowCommands>

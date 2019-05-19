@@ -29,18 +29,11 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
     public class MainViewModel : ViewModel
     {
         User user;
-        public User User { get => user; set { Set(ref user, value, broadcast: true); RaisePropertyChanged(nameof(CanShowUserInfo)); } }
+        public User User { get => user; set { Set(ref user, value, broadcast: true); LogoutCommand.RaiseCanExecuteChanged(); RaisePropertyChanged(nameof(CanShowUserInfo)); } }
         public bool CanShowUserInfo => User != null;
-
-        public void ResetUser()
-        {
-            user = null;
-            RaisePropertyChanged(nameof(User));
-            RaisePropertyChanged(nameof(CanShowUserInfo));
-        }
-
+        
         Library library;
-        public Library Library { get => library; set { Set(ref library, value, broadcast: true); RaisePropertyChanged(nameof(CanShowLibraryInfo)); } }
+        public Library Library { get => library; set { Set(ref library, value, broadcast: true); LogoutCommand.RaiseCanExecuteChanged(); RaisePropertyChanged(nameof(CanShowLibraryInfo)); } }
         public bool CanShowLibraryInfo => Library != null;
 
         public string Title => $"{DisplayName} | {(CurrentPage?.DataContext as ViewModel)?.DisplayName}";
@@ -90,7 +83,8 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
             GoBackCommand = new RelayCommand(GoBack, CanGoBack);
             GoToCommand = new RelayCommand<string>(GoTo);
-            
+            LogoutCommand = new RelayCommand(Logout, CanLogout);
+
             GoTo<Login>();
         }
 
@@ -99,6 +93,18 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
         Stack<Page> pageStack = new Stack<Page>();
         public RelayCommand<string> GoToCommand { get; set; }
+
+        public bool CanLogout() => User != null;
+        public RelayCommand LogoutCommand { get; set; }
+        void Logout()
+        {
+            pageStack.Clear();
+            GoBackCommand.RaiseCanExecuteChanged();
+            User = null;
+            Library = null;
+            Scopes = null;
+            GoTo<Login>();
+        }
 
         public void GoTo<TPage>(bool removeHistory = false) where TPage : Page
         {
