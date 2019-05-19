@@ -85,6 +85,9 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
             SimpleIoc.Default.Reregister<LoanReturnOnBehalf>();
 
+            SimpleIoc.Default.Reregister<Roles>();
+            SimpleIoc.Default.Reregister<RoleDetail>();
+
             GoBackCommand = new RelayCommand(GoBack, CanGoBack);
             GoToCommand = new RelayCommand<string>(GoTo);
             
@@ -139,6 +142,10 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
                 case nameof(LoanReturnDetail): GoTo<LoanReturnDetail>(); break;
 
                 case nameof(LoanReturnOnBehalf): GoTo<LoanReturnOnBehalf>(); break;
+
+                case nameof(Roles): GoTo<Roles>(); break;
+                case nameof(RoleDetail): GoTo<RoleDetail>(); break;
+
                 default:
                     break;
             }

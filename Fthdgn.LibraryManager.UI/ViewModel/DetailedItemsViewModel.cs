@@ -38,8 +38,8 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             Repository = Managers.Repositories.Repository<T>();
         }
 
-        protected virtual Options<TItemViewModel> Map(Options<T> options) => options?.MapTo<T, TItemViewModel>();
-        protected virtual Options<T> Map(Options<TItemViewModel> options) => options?.MapTo<TItemViewModel, T>();
+        protected virtual Options<TItemViewModel> Map(Options<T> options) => options?.MapTo(x => Map(x));
+        protected virtual Options<T> Map(Options<TItemViewModel> options) => options?.MapTo(x => Map(x));
         protected virtual TItemViewModel Map(T item, TItemViewModel model = null) => model == null ? Mapper.Map<T, TItemViewModel>(item) : Mapper.Map(item, model);
         protected virtual T Map(TItemViewModel item, T model = null) => model == null ? Mapper.Map<TItemViewModel, T>(item) : Mapper.Map(item, model);
 

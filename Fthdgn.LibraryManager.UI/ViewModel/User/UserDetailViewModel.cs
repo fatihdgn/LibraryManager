@@ -19,38 +19,46 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             Name = nameof(UserDetailViewModel);
             DisplayName = "Kullanıcı Detayı";
             Managers = managers;
-            //SelectAuthorCommand = new RelayCommand(async () => await SelectAuthorAsync(), CanSelectAuthor, true);
-
+            SelectLibraryCommand = new RelayCommand(async () => await SelectLibraryAsync(), CanSelectLibrary, true);
+            SelectRoleCommand = new RelayCommand(async () => await SelectRoleAsync(), CanSelectRole, true);
         }
 
+        RelayCommand selectLibraryCommand;
+        public RelayCommand SelectLibraryCommand { get => selectLibraryCommand; set => Set(ref selectLibraryCommand, value); }
 
-        //RelayCommand selectAuthorCommand;
-        //public RelayCommand SelectAuthorCommand { get => selectAuthorCommand; set => Set(ref selectAuthorCommand, value); }
+        public bool CanSelectLibrary() => Locator.Main.Scopes.Library_Read;
+        public async Task SelectLibraryAsync()
+        {
+            var mode = Mode;
+            Mode = DetailMode.Select;
+            Locator.Libraries.CanSelect = true;
+            Locator.Main.GoTo(Locator.Libraries);
+            var library = await Locator.Libraries.SelectItemDialogAsync();
+            Locator.Libraries.CanSelect = false;
+            Mode = mode;
+            Locator.Main.GoBack();
 
-        //public bool CanSelectAuthor() => Locator.Main.Scopes.Author_Read;
-        //public async Task SelectAuthorAsync()
-        //{
-        //    var mode = Mode;
-        //    Mode = DetailMode.Select;
-        //    Locator.Authors.CanSelect = true;
-        //    Locator.Main.GoTo(Locator.Authors);
-        //    var author = await Locator.Authors.SelectItemDialogAsync();
-        //    Locator.Authors.CanSelect = false;
-        //    Mode = mode;
-        //    Locator.Main.GoBack();
+            if (library != null)
+                Item.Value.Library = library.Value;
+        }
 
-        //    if (author != null)
-        //        Item.Value.Author = author.Value;
-        //}
+        RelayCommand selectRoleCommand;
+        public RelayCommand SelectRoleCommand { get => selectRoleCommand; set => Set(ref selectRoleCommand, value); }
 
-        //public override void OnNavigating()
-        //{
-        //    base.OnNavigating();
-        //    if (Mode == DetailMode.Create || Mode == DetailMode.Edit)
-        //        Authors = new ObservableCollection<Author>(Managers.Repositories.Authors.Query().ToList());
-        //}
+        public bool CanSelectRole() => Locator.Main.Scopes.Role_Read;
+        public async Task SelectRoleAsync()
+        {
+            var mode = Mode;
+            Mode = DetailMode.Select;
+            Locator.Roles.CanSelect = true;
+            Locator.Main.GoTo(Locator.Roles);
+            var role = await Locator.Roles.SelectItemDialogAsync();
+            Locator.Roles.CanSelect = false;
+            Mode = mode;
+            Locator.Main.GoBack();
 
-        //ObservableCollection<Author> authors;
-        //public ObservableCollection<Author> Authors { get => authors; set => Set(ref authors, value); }
+            if (role != null)
+                Item.Value.Role = role.Value;
+        }
     }
 }

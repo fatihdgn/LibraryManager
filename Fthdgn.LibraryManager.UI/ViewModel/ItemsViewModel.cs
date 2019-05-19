@@ -74,7 +74,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
                 Items.Add(ProvideOptions(item));
 
             if (AutoSelect && Items.Count(x => x.IsSelectable) == 1)
-                OnItemSelectAsync(Items.FirstOrDefault(x => x.IsSelectable)).Wait();
+                OnItemSelectAsync(Items.FirstOrDefault(x => x.IsSelectable));
         }
 
         protected TaskCompletionSource<bool> createItemDialogCompletionSource;

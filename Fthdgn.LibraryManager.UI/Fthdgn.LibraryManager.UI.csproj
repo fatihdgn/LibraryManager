@@ -112,8 +112,15 @@
     <Compile Include="Models\Credential.cs" />
     <Compile Include="Models\Options.cs" />
     <Compile Include="Models\Scopes.cs" />
+    <Compile Include="Models\Selectable.cs" />
     <Compile Include="Pages\AuthorDetail.xaml.cs">
       <DependentUpon>AuthorDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RoleDetail.xaml.cs">
+      <DependentUpon>RoleDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Roles.xaml.cs">
+      <DependentUpon>Roles.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\LoanReturnOnBehalfDetail.xaml.cs">
       <DependentUpon>LoanReturnOnBehalfDetail.xaml</DependentUpon>
@@ -163,6 +170,9 @@
     <Compile Include="ViewModel\Author\AuthorDetailViewModel.cs" />
     <Compile Include="ViewModel\Author\AuthorsViewModel.cs" />
     <Compile Include="ViewModel\Author\AuthorViewModel.cs" />
+    <Compile Include="ViewModel\Role\RolesViewModel.cs" />
+    <Compile Include="ViewModel\Role\RoleDetailViewModel.cs" />
+    <Compile Include="ViewModel\Role\RoleViewModel.cs" />
     <Compile Include="ViewModel\Loan\LoanReturnDetailViewModel.cs" />
     <Compile Include="ViewModel\Loan\LoanReturnOnBehalfViewModel.cs" />
     <Compile Include="ViewModel\Loan\LoanReturnViewModel.cs" />
@@ -205,6 +215,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\AuthorDetail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\RoleDetail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Roles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

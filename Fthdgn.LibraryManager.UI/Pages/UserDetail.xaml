@@ -127,6 +127,58 @@
                             </StackPanel>
                         </Grid>
                     </Grid>
+                    <!-- Role -->
+                    <Grid Margin="0 2">
+                        <StackPanel Visibility="{Binding Mode, Converter={StaticResource ObjectToVisibilityConverter}, ConverterParameter='View'}">
+                            <TextBlock Text="Rol" Style="{StaticResource Header}" FontSize="16" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Item.Value.Role.Name, FallbackValue='Rol seçilmemiş'}" FontFamily="{StaticResource PoppinsLight}" FontSize="13"></TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Visibility="{Binding Mode, Converter={StaticResource ObjectToVisibilityConverter}, ConverterParameter='Create | Edit'}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="Rol" Style="{StaticResource Header}" FontSize="16" />
+                                    <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
+                                        <TextBlock Text="{Binding Item.Value.Role.Name, FallbackValue='Rol seçilmemiş'}" FontFamily="{StaticResource PoppinsLight}" FontSize="15" ></TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                                <Button Grid.Column="1" Margin="2 0" Command="{Binding SelectRoleCommand}">
+                                    <icons:PackIconMaterial Kind="ArrowRightThick" HorizontalAlignment="Center" Width="16" Height="16" />
+                                </Button>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                    <!-- Library -->
+                    <Grid Margin="0 2">
+                        <StackPanel Visibility="{Binding Mode, Converter={StaticResource ObjectToVisibilityConverter}, ConverterParameter='View'}">
+                            <TextBlock Text="Kütüphane" Style="{StaticResource Header}" FontSize="16" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Item.Value.Library.Name, FallbackValue='Kütüphane seçilmemiş'}" FontFamily="{StaticResource PoppinsLight}" FontSize="13"></TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Visibility="{Binding Mode, Converter={StaticResource ObjectToVisibilityConverter}, ConverterParameter='Create | Edit'}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="Kütüphane" Style="{StaticResource Header}" FontSize="16" />
+                                    <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
+                                        <TextBlock Text="{Binding Item.Value.Library.Name, FallbackValue='Kütüphane seçilmemiş'}" FontFamily="{StaticResource PoppinsLight}" FontSize="15" ></TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                                <Button Grid.Column="1" Margin="2 0" Command="{Binding SelectLibraryCommand}">
+                                    <icons:PackIconMaterial Kind="ArrowRightThick" HorizontalAlignment="Center" Width="16" Height="16" />
+                                </Button>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
             </ScrollViewer.Content>
         </ScrollViewer>

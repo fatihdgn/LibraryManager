@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Fthdgn.LibraryManager.Entities;
+using Fthdgn.LibraryManager.UI.Models;
 using Fthdgn.LibraryManager.UI.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,12 @@ namespace Fthdgn.LibraryManager.UI.Mapping
     {
         public static void Initialize(IMapperConfigurationExpression config = null)
         {
-            if(config == null)
+            if (config == null)
             {
                 Mapper.Initialize(Initialize);
                 return;
             }
-
+            
             config.CreateMap<Entity, EntityViewModel>();
             config.CreateMap<EntityViewModel, Entity>()
                   .ForMember(x => x.Id, o => o.Ignore())
@@ -40,6 +41,8 @@ namespace Fthdgn.LibraryManager.UI.Mapping
 
             config.CreateMap<Loan, LoanViewModel>().IncludeBase<Entity, EntityViewModel>();
             config.CreateMap<LoanViewModel, Loan>().IncludeBase<EntityViewModel, Entity>();
+            config.CreateMap<Role, RoleViewModel>().ForMember(x => x.Scopes, o => o.Ignore()).IncludeBase<Entity, EntityViewModel>();
+            config.CreateMap<RoleViewModel, Role>().ForMember(x => x.Scopes, o => o.Ignore()).IncludeBase<EntityViewModel, Entity>();
         }
     }
 }

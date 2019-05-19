@@ -10,6 +10,6 @@ namespace Fthdgn.LibraryManager.UI.Extensions
 {
     public static class OptionsExtensions
     {
-        public static Options<TTo> MapTo<TFrom, TTo>(this Options<TFrom> self) => new Options<TTo>(Mapper.Map<TTo>(self.Value), self.IsViewable, self.IsEditable, self.IsDeletable, self.IsSelectable);
+        public static Options<TTo> MapTo<TFrom, TTo>(this Options<TFrom> self, Func<TFrom, TTo> mapper = null) => new Options<TTo>((mapper ?? Mapper.Map<TFrom, TTo>)(self.Value), self.IsViewable, self.IsEditable, self.IsDeletable, self.IsSelectable);
     }
 }

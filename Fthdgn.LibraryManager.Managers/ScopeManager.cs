@@ -80,6 +80,16 @@ namespace Fthdgn.LibraryManager.Managers
             yield return Library_Read;
         }
 
+        public IEnumerable<string> LibraryAdmin()
+        {
+            yield return Author_All;
+            yield return Book_All;
+            yield return Loan_All;
+            yield return User_All;
+            yield return Role_Read;
+            yield return Library_Read;
+        }
+
         public IEnumerable<string> Admin()
         {
             yield return Author_All;

@@ -62,31 +62,18 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                            <StackPanel>
-                                <TextBlock Text="Yazar" Style="{StaticResource Header}" FontSize="16" />
-                                <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
-                                    <TextBlock Text="{Binding Item.Value.Author.Name, FallbackValue=Yazar}" FontFamily="{StaticResource PoppinsLight}" FontSize="15" ></TextBlock>
-                                    <TextBlock Text="{Binding Item.Value.Author.Surname, FallbackValue=Seçilmemiş}" FontFamily="{StaticResource PoppinsLight}" FontSize="15" Margin="5,0,0,0"></TextBlock>
+                                <StackPanel>
+                                    <TextBlock Text="Yazar" Style="{StaticResource Header}" FontSize="16" />
+                                    <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
+                                        <TextBlock Text="{Binding Item.Value.Author.Name, FallbackValue=Yazar}" FontFamily="{StaticResource PoppinsLight}" FontSize="15" ></TextBlock>
+                                        <TextBlock Text="{Binding Item.Value.Author.Surname, FallbackValue=Seçilmemiş}" FontFamily="{StaticResource PoppinsLight}" FontSize="15" Margin="5,0,0,0"></TextBlock>
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
-                            <Button Grid.Column="1" Margin="2 0" Command="{Binding SelectAuthorCommand}">
-                                <icons:PackIconMaterial Kind="ArrowRightThick" HorizontalAlignment="Center" Width="16" Height="16" />
-                            </Button>
+                                <Button Grid.Column="1" Margin="2 0" Command="{Binding SelectAuthorCommand}">
+                                    <icons:PackIconMaterial Kind="ArrowRightThick" HorizontalAlignment="Center" Width="16" Height="16" />
+                                </Button>
                             </Grid>
                         </StackPanel>
-                        <!--<StackPanel Visibility="{Binding Mode, Converter={StaticResource ObjectToVisibilityConverter}, ConverterParameter='Create | Edit'}">
-                            <ComboBox ItemsSource="{Binding Authors}" SelectedItem="{Binding Item.Value.Author}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Name}" FontFamily="{StaticResource PoppinsLight}" FontSize="13"></TextBlock>
-                                            <TextBlock Text="{Binding Surname}" FontFamily="{StaticResource PoppinsLight}" FontSize="13"  Margin="5,0,0,0"></TextBlock>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            --><!--<TextBox Text="{Binding Item.Value.Description}" mah:TextBoxHelper.Watermark="Açıklama" mah:TextBoxHelper.UseFloatingWatermark="True" FontFamily="{StaticResource PoppinsLight}" ></TextBox>--><!--
-                        </StackPanel>-->
                     </Grid>
                     <!-- LCC, LCCN, Pages -->
                     <Grid Margin="0 2">

@@ -34,6 +34,16 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         protected override Options<User> ProvideOptions(User item) => Locator.Main.Scopes.As(s => new Options<User>(item, s.User_Read, s.User_All, s.User_All, CanSelect));
         protected override bool FilterItem(string search, User item) => item.Name.ToLowerInvariant().Contains(search.ToLowerInvariant()) || item.Surname.ToLowerInvariant().Contains(search.ToLowerInvariant()) || item.MailAddress.ToLowerInvariant().Contains(search.ToLowerInvariant());
 
+        protected override UserViewModel Map(User item, UserViewModel model = null)
+        {
+            var map = base.Map(item, model);
+
+            var userRole = Managers.Repositories.UserRoles.Query().FirstOrDefault(x => x.User.Id == map.Id) ?? Managers.Repositories.UserRoles.Add(new UserRole { User = item });
+            map.Library = userRole.Library;
+            map.Role = userRole.Role;
+            return map;
+        }
+
         protected override User Map(UserViewModel item, User model = null)
         {
             var map = base.Map(item, model);
@@ -42,11 +52,10 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
                 map.PasswordHash = item.Password;
                 Managers.Users.ResolvePassword(map);
             }
-            if (!Managers.Repositories.UserRoles.Query().Any(x => x.User.Id == map.Id))
-            {
-                Managers.Repositories.UserRoles.Add(new UserRole { User = map, Role = Managers.Roles.Customer() });
-                Managers.Save();
-            }
+            var userRole = Managers.Repositories.UserRoles.Query().FirstOrDefault(x => x.User.Id == map.Id) ?? Managers.Repositories.UserRoles.Add(new UserRole { User = map });
+            userRole.Library = item.Library;
+            userRole.Role = item.Role ?? Managers.Roles.Customer();
+
             //if (map.Library == null) map.Library = Locator.Main.Library;
             //if (item.Author?.Id != null)
             //    map.Author = Managers.Repositories.Authors.Get(item.Author.Id);

@@ -37,7 +37,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             await base.OnItemSelectAsync(item);
             Locator.Main.Library = item?.Value;
             Locator.Main.Scopes = Scopes.From(Managers.Scopes.Get(Locator.Main.User, Locator.Main.Library));
-            Locator.Main.GoTo<Home>(Items.Count == 1);
+            Locator.Main.GoTo<Home>();
         }
 
         public override void OnNavigating()

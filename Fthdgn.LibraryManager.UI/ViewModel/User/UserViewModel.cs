@@ -30,5 +30,11 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
         string password;
         public string Password { get => password; set => Set(ref password, value); }
+        
+        Library library;
+        public Library Library { get => library; set => Set(ref library, value); }
+        
+        Role role;
+        public Role Role { get => role; set => Set(ref role, value); }
     }
 }
