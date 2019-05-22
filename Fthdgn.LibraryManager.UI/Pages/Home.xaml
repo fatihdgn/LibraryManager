@@ -26,12 +26,8 @@
                 <TextBlock Style="{DynamicResource Header}" Text="{Binding User.Name, StringFormat=Merhaba {0}}" FontSize="32" HorizontalAlignment="Center" />
                 <TextBlock Style="{DynamicResource Header}" Text="Ne yapmak istersiniz?" Margin="0,5,0,0" FontSize="22" HorizontalAlignment="Center" />
             </StackPanel>
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Grid.Row="1">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 2">
                     <Button Margin="0 0 2 0" MinWidth="125" Visibility="{Binding Scopes.Loan_Create, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding GoToCommand}" CommandParameter="LoanCreate">
                         <StackPanel>
                             <icons:PackIconOcticons Style="{DynamicResource MenuItem__Icon}" Kind="RepoPull" />
@@ -44,26 +40,26 @@
                             <TextBlock Style="{DynamicResource MenuItem__Text}" Text="Kitap İade Et" />
                         </StackPanel>
                     </Button>
+                    <Button Margin="2 0" MinWidth="125" Visibility="{Binding Scopes.Loan_Create_OnBehalf, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding GoToCommand}" CommandParameter="Loans">
+                        <StackPanel>
+                            <icons:PackIconOcticons Style="{DynamicResource MenuItem__Icon}" Kind="Repo"  />
+                            <TextBlock Style="{DynamicResource MenuItem__Text}" Text="Ödünç Listesi" />
+                        </StackPanel>
+                    </Button>
                     <Button Margin="2 0" MinWidth="125" Visibility="{Binding Scopes.Loan_Create_OnBehalf, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding GoToCommand}" CommandParameter="LoanOnBehalf">
                         <StackPanel>
                             <icons:PackIconOcticons Style="{DynamicResource MenuItem__Icon}" Kind="RepoClone" />
                             <TextBlock Style="{DynamicResource MenuItem__Text}" Text="Kitap Ödünç Ver" />
                         </StackPanel>
                     </Button>
-                    <Button Margin="2 0" MinWidth="125" Visibility="{Binding Scopes.Loan_Create_OnBehalf, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding GoToCommand}" CommandParameter="LoanReturnOnBehalf">
+                    <Button Margin="2 0 0 0" MinWidth="125" Visibility="{Binding Scopes.Loan_Create_OnBehalf, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding GoToCommand}" CommandParameter="LoanReturnOnBehalf">
                         <StackPanel>
                             <icons:PackIconOcticons Style="{DynamicResource MenuItem__Icon}" Kind="RepoForcePush"  />
                             <TextBlock Style="{DynamicResource MenuItem__Text}" Text="Kitap İade Al" />
                         </StackPanel>
                     </Button>
-                    <Button Margin="2 0 0 0" MinWidth="125" Visibility="{Binding Scopes.Loan_Create_OnBehalf, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding GoToCommand}" CommandParameter="Loans">
-                        <StackPanel>
-                            <icons:PackIconOcticons Style="{DynamicResource MenuItem__Icon}" Kind="Repo"  />
-                            <TextBlock Style="{DynamicResource MenuItem__Text}" Text="Ödünç Listesi" />
-                        </StackPanel>
-                    </Button>
                 </StackPanel>
-                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 2">
                     <Button Margin="0 0 2 0" MinWidth="100" Visibility="{Binding Scopes.Library_Read, Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding GoToCommand}" CommandParameter="Libraries">
                         <StackPanel>
                             <icons:PackIconMaterial Style="{DynamicResource MenuItem__Icon}" Kind="Library"  />
@@ -95,7 +91,7 @@
                         </StackPanel>
                     </Button>
                 </StackPanel>
-            </Grid>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>
