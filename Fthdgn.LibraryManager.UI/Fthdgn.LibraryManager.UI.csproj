@@ -116,6 +116,12 @@
     <Compile Include="Pages\AuthorDetail.xaml.cs">
       <DependentUpon>AuthorDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\LoanDetail.xaml.cs">
+      <DependentUpon>LoanDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Loans.xaml.cs">
+      <DependentUpon>Loans.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RoleDetail.xaml.cs">
       <DependentUpon>RoleDetail.xaml</DependentUpon>
     </Compile>
@@ -170,13 +176,14 @@
     <Compile Include="ViewModel\Author\AuthorDetailViewModel.cs" />
     <Compile Include="ViewModel\Author\AuthorsViewModel.cs" />
     <Compile Include="ViewModel\Author\AuthorViewModel.cs" />
+    <Compile Include="ViewModel\Loan\LoansViewModel.cs" />
+    <Compile Include="ViewModel\Loan\LoanDetailViewModel.cs" />
     <Compile Include="ViewModel\Role\RolesViewModel.cs" />
     <Compile Include="ViewModel\Role\RoleDetailViewModel.cs" />
     <Compile Include="ViewModel\Role\RoleViewModel.cs" />
     <Compile Include="ViewModel\Loan\LoanReturnDetailViewModel.cs" />
     <Compile Include="ViewModel\Loan\LoanReturnOnBehalfViewModel.cs" />
     <Compile Include="ViewModel\Loan\LoanReturnViewModel.cs" />
-    <Compile Include="ViewModel\Loan\LoansViewModel.cs" />
     <Compile Include="ViewModel\Loan\LoanOnBehalfViewModel.cs" />
     <Compile Include="ViewModel\Loan\LoanViewModel.cs" />
     <Compile Include="ViewModel\Loan\LoanCreateViewModel.cs" />
@@ -215,6 +222,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\AuthorDetail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\LoanDetail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Loans.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -15,43 +15,54 @@ using System.Threading.Tasks;
 
 namespace Fthdgn.LibraryManager.UI.ViewModel
 {
-    //public class LoanReturnsViewModel : DetailedItemsViewModel<Loan, LoanViewModel, LoanReturnDetailViewModel>
-    //{
-    //    public LoanReturnsViewModel(ViewModelLocator locator, LibraryDetailViewModel detailViewModel, LibraryManagerManagers managers) : base(locator, detailViewModel, managers)
-    //    {
-    //        Name = nameof(LoanReturnsViewModel);
-    //        DisplayName = "Kütüphaneler";
-    //        CreateText = "Yeni Kütüphane";
-    //        CanSearch = true;
-    //        CanSelect = false;
-    //        AutoSelect = false;
+    public class LoansViewModel : DetailedItemsViewModel<Loan, LoanViewModel, LoanDetailViewModel>
+    {
+        public LoansViewModel(ViewModelLocator locator, LoanDetailViewModel detailViewModel, LibraryManagerManagers managers) : base(locator, detailViewModel, managers)
+        {
+            Name = nameof(LoansViewModel);
+            DisplayName = "Ödünç Listesi";
+            CanCreate = false;
+            CanSearch = true;
+            CanSelect = false;
+            AutoSelect = false;
 
-    //        Managers = managers;
-    //        Messenger.Default.Register<PropertyChangedMessage<Library>>(this, pcm => OnNavigating());
-    //    }
+            Managers = managers;
+        }
 
-    //    protected override IEnumerable<Library> ProvideItems() => Managers.Repositories.Libraries.Query().OrderBy(x => x.Name);
-    //    protected override Options<Library> ProvideOptions(Library item) => Locator.Main.Scopes.As(s => new Options<Library>(item, s.Library_Read, s.Library_All, s.Library_All, CanSelect));
-    //    protected override bool FilterItem(string search, Library item) => item.Name.ToLowerInvariant().Contains(search.ToLowerInvariant());
+        protected override IEnumerable<Loan> ProvideItems() => Managers.Loans.ByUser(Locator.Main.User).OrderByDescending(x => x.ReturnsAt);
+        protected override Options<Loan> ProvideOptions(Loan item) => Locator.Main.Scopes.As(s => new Options<Loan>(item, true, item.ReturnedAt == null, false, CanSelect));
+        protected override bool FilterItem(string search, Loan item) => search.ToLowerInvariant().As(sl =>
+            item.Book.Name.ToLowerInvariant().Contains(sl) ||
+            item.Book.LCC.ToLowerInvariant().Contains(sl) ||
+            item.Book.LCCN.ToLowerInvariant().Contains(sl) ||
+            item.User.Name.ToLowerInvariant().Contains(sl) ||
+            item.User.Surname.ToLowerInvariant().Contains(sl) ||
+            item.Library.Name.ToLowerInvariant().Contains(sl)
+        );
 
-    //    protected override Library Map(LibraryViewModel item, Library model = null)
-    //    {
-    //        var map = base.Map(item, model);
-    //        //if (map.Library == null) map.Library = Locator.Main.Library;
-    //        //if (item.Author?.Id != null)
-    //        //    map.Author = Managers.Repositories.Authors.Get(item.Author.Id);
-    //        //else
-    //        //    map.Author = null;
-    //        return map;
-    //    }
+        protected override async Task OnItemEditAsync(Options<Loan> item)
+        {
+            var vm = Locator.LoanReturnDetail;
+            vm.Mode = DetailMode.Delete;
+            Locator.Main.GoTo(vm);
+            var result = await vm.DeleteItemAsync(item.MapTo<Loan, LoanViewModel>());
+            if (result?.IsChanged ?? false)
+            {
+                var loan = Managers.Repositories.Loans.Get(result.Value.Id);
+                loan.ReturnedAt = DateTimeOffset.Now;
+                Managers.Repositories.Loans.Update(loan);
+                Managers.Save();
+            }
+            Locator.Main.GoBack();
+            vm.Mode = DetailMode.View;
+        }
 
-    //    public override void OnNavigating()
-    //    {
-    //        if (Locator.Main.Library != null)
-    //        {
-    //            CanCreate = Locator.Main.Scopes.Library_All;
-    //            FetchItems();
-    //        }
-    //    }
-    //}
+        public override void OnNavigating()
+        {
+            if (Locator.Main.Library != null && Locator.Main.User != null && Locator.Main.Scopes != null)
+            {
+                FetchItems();
+            }
+        }
+    }
 }

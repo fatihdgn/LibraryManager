@@ -14,7 +14,10 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         
         Book book;
         public Book Book { get => book; set => Set(ref book, value); }
-        
+
+        string loanedAt;
+        public string LoanedAt { get => loanedAt; set => Set(ref loanedAt, value); }
+
         string returnsAt;
         public string ReturnsAt { get => returnsAt; set => Set(ref returnsAt, value); }
         

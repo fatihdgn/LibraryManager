@@ -81,6 +81,9 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             SimpleIoc.Default.Reregister<Roles>();
             SimpleIoc.Default.Reregister<RoleDetail>();
 
+            SimpleIoc.Default.Reregister<Loans>();
+            SimpleIoc.Default.Reregister<LoanDetail>();
+
             GoBackCommand = new RelayCommand(GoBack, CanGoBack);
             GoToCommand = new RelayCommand<string>(GoTo);
             LogoutCommand = new RelayCommand(Logout, CanLogout);
@@ -151,6 +154,9 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
                 case nameof(Roles): GoTo<Roles>(); break;
                 case nameof(RoleDetail): GoTo<RoleDetail>(); break;
+
+                case nameof(Loans): GoTo<Loans>(); break;
+                case nameof(LoanDetail): GoTo<LoanDetail>(); break;
 
                 default:
                     break;

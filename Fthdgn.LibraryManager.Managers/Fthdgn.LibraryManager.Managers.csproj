@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LoanManager.cs" />
     <Compile Include="LibraryManager.cs" />
     <Compile Include="LibraryManagerManager.cs" />
     <Compile Include="LibraryManagerManagers.cs" />

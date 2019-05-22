@@ -22,6 +22,7 @@ namespace Fthdgn.LibraryManager.Managers
             Users = new UserManager(this);
             UserRoles = new UserRoleManager(this);
             Libraries = new LibraryManager(this);
+            Loans = new LoanManager(this);
         }
 
         public RoleManager Roles { get; set; }
@@ -29,6 +30,7 @@ namespace Fthdgn.LibraryManager.Managers
         public UserManager Users { get; set; }
         public UserRoleManager UserRoles { get; set; }
         public LibraryManager Libraries { get; set; }
+        public LoanManager Loans { get; set; }
 
         public void Save() => Context?.SaveChanges();
 

@@ -69,6 +69,9 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
             Register<RolesViewModel>();
             Register<RoleDetailViewModel>();
+
+            Register<LoansViewModel>();
+            Register<LoanDetailViewModel>();
         }
 
         void Register<T>(Func<T> factory = null) where T : class
@@ -105,6 +108,9 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
         public RolesViewModel Roles => Get<RolesViewModel>();
         public RoleDetailViewModel RoleDetail => Get<RoleDetailViewModel>();
+
+        public LoansViewModel Loans => Get<LoansViewModel>();
+        public LoanDetailViewModel LoanDetail => Get<LoanDetailViewModel>();
 
         public static void Cleanup()
         {
