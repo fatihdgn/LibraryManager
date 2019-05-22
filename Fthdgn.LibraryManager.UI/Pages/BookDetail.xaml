@@ -115,10 +115,10 @@
                     <Grid Margin="0 2">
                         <StackPanel Visibility="{Binding Mode, Converter={StaticResource ObjectToVisibilityConverter}, ConverterParameter='View'}">
                             <TextBlock Text="Yayınlanma tarihi" Style="{StaticResource Header}" FontSize="16" />
-                            <TextBlock Text="{Binding Item.Value.PublishedAt, StringFormat=d}" FontFamily="{StaticResource PoppinsLight}" FontSize="13"></TextBlock>
+                            <TextBlock Text="{Binding Item.Value.PublishedAt}" FontFamily="{StaticResource PoppinsLight}" FontSize="13"></TextBlock>
                         </StackPanel>
                         <StackPanel Visibility="{Binding Mode, Converter={StaticResource ObjectToVisibilityConverter}, ConverterParameter='Create | Edit'}">
-                            <DatePicker DataContext="{Binding Item.Value.PublishedAt, Converter={StaticResource NullableDateTimeOffsetConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" mah:TextBoxHelper.Watermark="Yayınlanma tarihi" mah:TextBoxHelper.UseFloatingWatermark="True" FontFamily="{StaticResource PoppinsLight}" />
+                            <TextBox DataContext="{Binding Item.Value.PublishedAt, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" mah:TextBoxHelper.Watermark="Yayınlanma tarihi" mah:TextBoxHelper.UseFloatingWatermark="True" FontFamily="{StaticResource PoppinsLight}" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>

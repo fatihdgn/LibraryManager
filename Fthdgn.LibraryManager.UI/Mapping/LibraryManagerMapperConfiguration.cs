@@ -19,13 +19,15 @@ namespace Fthdgn.LibraryManager.UI.Mapping
                 Mapper.Initialize(Initialize);
                 return;
             }
-            
+
             config.CreateMap<Entity, EntityViewModel>();
             config.CreateMap<EntityViewModel, Entity>()
                   .ForMember(x => x.Id, o => o.Ignore())
                   .ForMember(x => x.CreatedAt, o => o.Ignore())
                   .ForMember(x => x.ChangedAt, o => o.Ignore())
                   .ForMember(x => x.RemovedAt, o => o.Ignore());
+            config.CreateMap<DateTimeOffset?, string>().ConvertUsing(x => (x ?? DateTimeOffset.Now).ToString("dd.MM.yyyy"));
+            config.CreateMap<string, DateTimeOffset?>().ConvertUsing(x => string.IsNullOrEmpty(x) ? new DateTimeOffset?() : new DateTimeOffset?(DateTimeOffset.ParseExact(x, "dd.MM.yyyy", null)));
 
             config.CreateMap<Book, BookViewModel>().IncludeBase<Entity, EntityViewModel>();
             config.CreateMap<BookViewModel, Book>().IncludeBase<EntityViewModel, Entity>();

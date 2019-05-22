@@ -43,13 +43,15 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             await base.YesAsync();
             if (Decision == Decision.Yes)
             {
+                DateTimeOffset returnsAt;
+                DateTimeOffset.TryParseExact(Item.Value.ReturnsAt,"dd.MM.yyyy", null, System.Globalization.DateTimeStyles.AssumeLocal, out returnsAt);
                 Managers.Repositories.Loans.Add(new Loan
                 {
                     Library = Locator.Main.Library,
                     User = Locator.Main.User,
                     Book = Item.Value.Book,
                     LoanedAt = DateTimeOffset.Now,
-                    ReturnsAt = Item.Value.ReturnsAt
+                    ReturnsAt = returnsAt
                 });
                 Managers.Save();
             }

@@ -20,8 +20,8 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         Author author;
         public Author Author { get => author; set => Set(ref author, value); }
 
-        DateTimeOffset? publishedAt = DateTimeOffset.Now;
-        public DateTimeOffset? PublishedAt { get => publishedAt; set => Set(ref publishedAt, value); }
+        string publishedAt;
+        public string PublishedAt { get => publishedAt; set => Set(ref publishedAt, value); }
         
         int? pages;
         public int? Pages { get => pages; set => Set(ref pages, value); }

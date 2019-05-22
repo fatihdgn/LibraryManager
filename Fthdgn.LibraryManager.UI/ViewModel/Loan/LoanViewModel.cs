@@ -15,10 +15,10 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         Book book;
         public Book Book { get => book; set => Set(ref book, value); }
         
-        DateTimeOffset? returnsAt;
-        public DateTimeOffset? ReturnsAt { get => returnsAt; set => Set(ref returnsAt, value); }
+        string returnsAt;
+        public string ReturnsAt { get => returnsAt; set => Set(ref returnsAt, value); }
         
-        DateTimeOffset? returnedAt;
-        public DateTimeOffset? ReturnedAt { get => returnedAt; set => Set(ref returnedAt, value); }
+        string returnedAt;
+        public string ReturnedAt { get => returnedAt; set => Set(ref returnedAt, value); }
     }
 }

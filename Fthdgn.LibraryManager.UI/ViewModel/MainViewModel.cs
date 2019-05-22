@@ -167,10 +167,10 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             var pCurrent = pageStack.Pop();
             var vmCurrent = pCurrent?.DataContext as ViewModel;
             vmCurrent?.OnNavigating();
-            vmPre?.OnNavigatingAway(vmCurrent?.Name);
+            vmPre?.OnNavigatingAway(vmCurrent?.Name, true);
             CurrentPage = pCurrent;
             vmCurrent?.OnNavigated();
-            vmPre?.OnNavigatedAway(vmCurrent?.Name);
+            vmPre?.OnNavigatedAway(vmCurrent?.Name, true);
             GoBackCommand.RaiseCanExecuteChanged();
         }
     }

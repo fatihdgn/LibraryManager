@@ -56,7 +56,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
         public override void OnNavigating()
         {
-            if (Locator.Main.Library != null)
+            if (Locator.Main.Library != null && Locator.Main.Scopes != null)
             {
                 CanCreate = Locator.Main.Scopes.Library_All;
                 FetchItems();

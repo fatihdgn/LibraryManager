@@ -30,24 +30,13 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             Messenger.Default.Register<PropertyChangedMessage<Library>>(this, pcm => OnNavigating());
         }
 
-        protected override IEnumerable<Library> ProvideItems() => Managers.Repositories.Libraries.Query().OrderBy(x => x.Name);
+        protected override IEnumerable<Library> ProvideItems() => Managers.Libraries.ByUser(Locator.Main.User).OrderBy(x => x.Name);
         protected override Options<Library> ProvideOptions(Library item) => Locator.Main.Scopes.As(s => new Options<Library>(item, s.Library_Read, s.Library_All, s.Library_All, CanSelect));
         protected override bool FilterItem(string search, Library item) => item.Name.ToLowerInvariant().Contains(search.ToLowerInvariant());
 
-        protected override Library Map(LibraryViewModel item, Library model = null)
-        {
-            var map = base.Map(item, model);
-            //if (map.Library == null) map.Library = Locator.Main.Library;
-            //if (item.Author?.Id != null)
-            //    map.Author = Managers.Repositories.Authors.Get(item.Author.Id);
-            //else
-            //    map.Author = null;
-            return map;
-        }
-
         public override void OnNavigating()
         {
-            if (Locator.Main.Library != null)
+            if (Locator.Main.Library != null && Locator.Main.Scopes != null)
             {
                 CanCreate = Locator.Main.Scopes.Library_All;
                 FetchItems();

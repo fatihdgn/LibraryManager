@@ -81,7 +81,7 @@
                     <Grid Margin="0 2">
                         <StackPanel>
                             <TextBlock Text="Geri getirme tarihi" Style="{StaticResource Header}" FontSize="16" />
-                            <DatePicker DataContext="{Binding Item.Value.ReturnsAt, Converter={StaticResource NullableDateTimeOffsetConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontFamily="{StaticResource PoppinsLight}" />
+                            <TextBox Text="{Binding Item.Value.ReturnsAt, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontFamily="{StaticResource PoppinsLight}" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>

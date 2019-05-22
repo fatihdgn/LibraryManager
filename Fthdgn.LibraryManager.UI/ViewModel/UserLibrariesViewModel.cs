@@ -35,9 +35,11 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         protected override async Task OnItemSelectAsync(Options<Library> item)
         {
             await base.OnItemSelectAsync(item);
+            AutoSelect = false;
             Locator.Main.Library = item?.Value;
             Locator.Main.Scopes = Scopes.From(Managers.Scopes.Get(Locator.Main.User, Locator.Main.Library));
             Locator.Main.GoTo<Home>();
+
         }
 
         public override void OnNavigating()
@@ -50,9 +52,9 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             }
         }
 
-        public override void OnNavigatingAway(string to = null)
+        public override void OnNavigatingAway(string to = null, bool isBack = false)
         {
-            base.OnNavigatingAway(to);
+            base.OnNavigatingAway(to, isBack);
             if (to == nameof(Login))
                 Locator.Main.User = null;
         }

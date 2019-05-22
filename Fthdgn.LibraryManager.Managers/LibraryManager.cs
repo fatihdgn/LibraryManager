@@ -13,6 +13,6 @@ namespace Fthdgn.LibraryManager.Managers
         {
         }
 
-        public IEnumerable<Library> ByUser(User user) => Repositories.UserRoles.Get(user).Any(x => x.Library == null) ? Repositories.Libraries.Get() : Repositories.UserRoles.Get(user).Select(x => x.Library).ToList();
+        public IEnumerable<Library> ByUser(User user) => Repositories.UserRoles.Get(user).Any(x => x.Library == null) ? Repositories.Libraries.Get() : Repositories.Libraries.Filter(Repositories.UserRoles.Get(user).Select(x => x.Library)).ToList();
     }
 }

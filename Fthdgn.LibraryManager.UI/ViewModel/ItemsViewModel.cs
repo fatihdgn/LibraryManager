@@ -174,7 +174,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             }
         }
 
-        public override void OnNavigatingAway(string to = null)
+        public override void OnNavigatingAway(string to = null, bool isBack = false)
         {
             if (!CanSelect)
             {
@@ -186,7 +186,11 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
                 deleteItemDialogCompletionSource = null;
                 selectItemDialogCompletionSource?.SetResult(null);
                 selectItemDialogCompletionSource = null;
-
+            }
+            else if (isBack)
+            {
+                selectItemDialogCompletionSource?.SetResult(null);
+                selectItemDialogCompletionSource = null;
             }
         }
     }

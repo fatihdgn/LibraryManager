@@ -21,8 +21,9 @@ namespace Fthdgn.LibraryManager.Repositories
         }
 
         public DbSet<TEntity> Set => Context?.Set<TEntity>();
-        public virtual IQueryable<TEntity> Query(bool includeDeactivated = false, bool includeRemoved = false) => Set?.Where(x => includeDeactivated || x.IsEnabled)?.Where(x => includeRemoved || x.RemovedAt == null);
-
+        public virtual IEnumerable<TEntity> Filter(IEnumerable<TEntity> query, bool includeDeactivated = false, bool includeRemoved = false) => query?.Where(x => includeDeactivated || x.IsEnabled)?.Where(x => includeRemoved || x.RemovedAt == null);
+        public virtual IQueryable<TEntity> Filter(IQueryable<TEntity> query, bool includeDeactivated = false, bool includeRemoved = false) => query?.Where(x => includeDeactivated || x.IsEnabled)?.Where(x => includeRemoved || x.RemovedAt == null);
+        public virtual IQueryable<TEntity> Query(bool includeDeactivated = false, bool includeRemoved = false) => Filter(Set.AsQueryable(), includeDeactivated, includeRemoved);
         public virtual IEnumerable<TEntity> Get(bool includeDeactivated = false, bool includeRemoved = false) => Query(includeDeactivated, includeRemoved)?.AsEnumerable();
         public virtual IEnumerable<TEntity> Get() => Get(includeDeactivated: false, includeRemoved: false);
         public virtual TEntity Get(string key) => Set?.Find(key);

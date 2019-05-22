@@ -93,7 +93,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             Decision = Decision.None;
         }
 
-        public override void OnNavigatingAway(string to = null)
+        public override void OnNavigatingAway(string to = null, bool isBack = false)
         {
             Item.IsChanged = Decision == Decision.Yes;
             switch (Mode)

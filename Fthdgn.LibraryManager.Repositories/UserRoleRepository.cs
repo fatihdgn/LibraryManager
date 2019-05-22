@@ -15,7 +15,7 @@ namespace Fthdgn.LibraryManager.Repositories
         {
         }
 
-        public IEnumerable<UserRole> Get(User user = null, Role role = null, Library library = null) => 
+        public IEnumerable<UserRole> Get(User user = null, Role role = null, Library library = null) =>
             Query()
                 .As(q => user != null ? q.Where(x => x.User.Id == user.Id) : q)
                 .As(q => role != null ? q.Where(x => x.Role.Id == role.Id) : q)
