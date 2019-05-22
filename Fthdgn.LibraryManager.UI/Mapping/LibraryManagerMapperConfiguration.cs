@@ -27,7 +27,13 @@ namespace Fthdgn.LibraryManager.UI.Mapping
                   .ForMember(x => x.ChangedAt, o => o.Ignore())
                   .ForMember(x => x.RemovedAt, o => o.Ignore());
             config.CreateMap<DateTimeOffset?, string>().ConvertUsing(x => (x ?? DateTimeOffset.Now).ToString("dd.MM.yyyy"));
-            config.CreateMap<string, DateTimeOffset?>().ConvertUsing(x => string.IsNullOrEmpty(x) ? new DateTimeOffset?() : new DateTimeOffset?(DateTimeOffset.ParseExact(x, "dd.MM.yyyy", null)));
+            config.CreateMap<string, DateTimeOffset?>().ConstructUsing((x, _) =>
+            {
+                if (string.IsNullOrEmpty(x)) return new DateTimeOffset?();
+                DateTimeOffset returnsAt;
+                DateTimeOffset.TryParseExact(x, "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.AssumeLocal, out returnsAt);
+                return new DateTimeOffset?(returnsAt);
+            });
 
             config.CreateMap<Book, BookViewModel>().IncludeBase<Entity, EntityViewModel>();
             config.CreateMap<BookViewModel, Book>().IncludeBase<EntityViewModel, Entity>();
