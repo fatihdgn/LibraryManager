@@ -18,5 +18,7 @@ namespace Fthdgn.LibraryManager.Entities
         public virtual string LCCN { get; set; }
         public virtual Library Library { get; set; }
         public virtual List<Loan> Loans { get; set; }
+
+        public override string ToString() => Name;
     }
 }

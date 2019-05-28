@@ -22,12 +22,30 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBox mah:TextBoxHelper.Watermark="Arama" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding CanSearch, Converter={StaticResource BooleanToVisibilityConverter}}" FontFamily="{StaticResource PoppinsLight}" />
-            <Button Grid.Column="1" Command="{Binding CreateItemCommand}" Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <StackPanel Orientation="Horizontal">
-                    <icons:PackIconMaterial Kind="Plus" HorizontalAlignment="Center" Width="10" Height="10" VerticalAlignment="Center" />
-                    <TextBlock Margin="5,0,0,0" Text="{Binding CreateText}" FontFamily="{StaticResource PoppinsLight}" FontSize="12" />
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal"  Margin="0 0 2 0">
+                    <Button Command="{Binding SelectUserCommand}" Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <StackPanel Orientation="Horizontal">
+                            <icons:PackIconMaterial Kind="Account" HorizontalAlignment="Center" Width="10" Height="10" VerticalAlignment="Center" />
+                            <TextBlock Margin="5,0,0,0" Text="{Binding UserFilterText}" FontFamily="{StaticResource PoppinsLight}" FontSize="12" />
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding ClearUserCommand}" Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <icons:PackIconMaterial Kind="Close" HorizontalAlignment="Center" Width="8" Height="8" VerticalAlignment="Center" />
+                    </Button>
                 </StackPanel>
-            </Button>
+                <StackPanel Orientation="Horizontal"  Margin="0 0 2 0">
+                    <Button Command="{Binding SelectBookCommand}" Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <StackPanel Orientation="Horizontal">
+                            <icons:PackIconEntypo Kind="Book" HorizontalAlignment="Center" Width="10" Height="10" VerticalAlignment="Center" />
+                            <TextBlock Margin="5,0,0,0" Text="{Binding BookFilterText}" FontFamily="{StaticResource PoppinsLight}" FontSize="12" />
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding ClearBookCommand}" Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <icons:PackIconMaterial Kind="Close" HorizontalAlignment="Center" Width="8" Height="8" VerticalAlignment="Center" />
+                    </Button>
+                </StackPanel>
+            </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -59,16 +77,16 @@
                                         </Border>
                                         <Border BorderThickness="1,0,1,0" BorderBrush="{DynamicResource AccentColorBrush}">
                                             <StackPanel Orientation="Vertical" Margin="5 0">
-                                            <TextBlock Text="Beklenen İade Tarihi" Style="{DynamicResource Header}" FontFamily="{StaticResource PoppinsRegular}" VerticalAlignment="Center" />
-                                            <TextBlock Text="{Binding Value.ReturnsAt, StringFormat='dd.MM.yyyy'}" Style="{DynamicResource Header}" FontFamily="{StaticResource PoppinsRegular}" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                        </StackPanel>
+                                                <TextBlock Text="Beklenen İade Tarihi" Style="{DynamicResource Header}" FontFamily="{StaticResource PoppinsRegular}" VerticalAlignment="Center" />
+                                                <TextBlock Text="{Binding Value.ReturnsAt, StringFormat='dd.MM.yyyy'}" Style="{DynamicResource Header}" FontFamily="{StaticResource PoppinsRegular}" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                            </StackPanel>
                                         </Border>
                                         <Border BorderThickness="0,0,1,0" BorderBrush="{DynamicResource AccentColorBrush}">
                                             <StackPanel Orientation="Vertical" Margin="5 0">
-                                            <TextBlock Text="İade Tarihi" Style="{DynamicResource Header}" FontFamily="{StaticResource PoppinsRegular}" VerticalAlignment="Center" />
-                                            <TextBlock Text="{Binding Value.ReturnedAt, StringFormat='dd.MM.yyyy', FallbackValue='Yok'}" Style="{DynamicResource Header}" FontFamily="{StaticResource PoppinsRegular}" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                        </StackPanel>
-                                    </Border>
+                                                <TextBlock Text="İade Tarihi" Style="{DynamicResource Header}" FontFamily="{StaticResource PoppinsRegular}" VerticalAlignment="Center" />
+                                                <TextBlock Text="{Binding Value.ReturnedAt, StringFormat='dd.MM.yyyy', FallbackValue='Yok'}" Style="{DynamicResource Header}" FontFamily="{StaticResource PoppinsRegular}" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                            </StackPanel>
+                                        </Border>
                                     </StackPanel>
                                     <StackPanel Grid.Column="1" Orientation="Horizontal">
                                         <StackPanel Orientation="Horizontal" Visibility="{Binding IsOptionsAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">

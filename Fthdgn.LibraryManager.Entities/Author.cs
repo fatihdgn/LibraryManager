@@ -12,5 +12,7 @@ namespace Fthdgn.LibraryManager.Entities
         public string Surname { get; set; }
         public List<Book> Books { get; set; } = new List<Book>();
         public virtual Library Library { get; set; }
+
+        public override string ToString() => $"{Name} {Surname}";
     }
 }

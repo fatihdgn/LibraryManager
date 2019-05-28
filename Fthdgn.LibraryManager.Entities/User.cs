@@ -18,5 +18,7 @@ namespace Fthdgn.LibraryManager.Entities
         public virtual Media Image { get; set; }
         public virtual List<UserRole> Roles { get; set; } = new List<UserRole>();
         public virtual List<Loan> Loans { get; set; } = new List<Loan>();
+
+        public override string ToString() => $"{Name} {Surname}";
     }
 }

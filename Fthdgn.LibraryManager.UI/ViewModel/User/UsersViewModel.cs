@@ -6,6 +6,7 @@ using Fthdgn.LibraryManager.Repositories;
 using Fthdgn.LibraryManager.UI.Extensions;
 using Fthdgn.LibraryManager.UI.Models;
 using Fthdgn.LibraryManager.UI.Pages;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
@@ -28,11 +29,23 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
             Managers = managers;
             Messenger.Default.Register<PropertyChangedMessage<Library>>(this, pcm => OnNavigating());
+            ViewLoansCommand = new RelayCommand<Options<User>>(ViewLoans, CanViewLoans);
+            
         }
 
         protected override IEnumerable<User> ProvideItems() => Managers.Users.ByUser(Locator.Main.User).OrderBy(x => x.Name);
         protected override Options<User> ProvideOptions(User item) => Locator.Main.Scopes.As(s => new Options<User>(item, s.User_Read, s.User_All, s.User_All, CanSelect));
         protected override bool FilterItem(string search, User item) => item.Name.ToLowerInvariant().Contains(search.ToLowerInvariant()) || item.Surname.ToLowerInvariant().Contains(search.ToLowerInvariant()) || item.MailAddress.ToLowerInvariant().Contains(search.ToLowerInvariant());
+
+        RelayCommand<Options<User>> viewLoansCommand;
+        public RelayCommand<Options<User>> ViewLoansCommand { get => viewLoansCommand; set => Set(ref viewLoansCommand, value); }
+
+        public bool CanViewLoans(Options<User> item) => !CanSelect && Locator.Main.Scopes.Loan_Create_OnBehalf;
+        public void ViewLoans(Options<User> item)
+        {
+            Locator.Loans.User = item.Value;
+            Locator.Main.GoTo(Locator.Loans);
+        }
 
         protected override UserViewModel Map(User item, UserViewModel model = null)
         {
