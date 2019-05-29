@@ -6,6 +6,7 @@ using Fthdgn.LibraryManager.Repositories;
 using Fthdgn.LibraryManager.UI.Extensions;
 using Fthdgn.LibraryManager.UI.Models;
 using Fthdgn.LibraryManager.UI.Pages;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,17 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
             Managers = managers;
             Messenger.Default.Register<PropertyChangedMessage<Library>>(this, pcm => OnNavigating());
+            ViewUsersCommand = new RelayCommand<Options<Role>>(ViewLoans, CanViewLoans);
+        }
+
+        RelayCommand<Options<Role>> viewUsersCommand;
+        public RelayCommand<Options<Role>> ViewUsersCommand { get => viewUsersCommand; set => Set(ref viewUsersCommand, value); }
+
+        public bool CanViewLoans(Options<Role> item) => !CanSelect && Locator.Main.Scopes.User_Read;
+        public void ViewLoans(Options<Role> item)
+        {
+            Locator.Users.Role = item.Value;
+            Locator.Main.GoTo(Locator.Users);
         }
 
         protected override IEnumerable<Role> ProvideItems() => Managers.Repositories.Roles.Query().OrderBy(x => x.Name);
