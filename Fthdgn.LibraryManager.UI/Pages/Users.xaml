@@ -22,12 +22,36 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBox mah:TextBoxHelper.Watermark="Arama" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding CanSearch, Converter={StaticResource BooleanToVisibilityConverter}}" FontFamily="{StaticResource PoppinsLight}" />
-            <Button Grid.Column="1" Command="{Binding CreateItemCommand}" Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <StackPanel Orientation="Horizontal">
-                    <icons:PackIconMaterial Kind="Plus" HorizontalAlignment="Center" Width="10" Height="10" VerticalAlignment="Center" />
-                    <TextBlock Margin="5,0,0,0" Text="{Binding CreateText}" FontFamily="{StaticResource PoppinsLight}" FontSize="12" />
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="0 0 2 0">
+                    <Button Command="{Binding SelectLibraryCommand}" Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <StackPanel Orientation="Horizontal">
+                            <icons:PackIconMaterial Kind="Library" HorizontalAlignment="Center" Width="10" Height="10" VerticalAlignment="Center" />
+                            <TextBlock Margin="5,0,0,0" Text="{Binding LibraryFilterText}" FontFamily="{StaticResource PoppinsLight}" FontSize="12" />
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding ClearLibraryCommand}" Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <icons:PackIconMaterial Kind="Close" HorizontalAlignment="Center" Width="8" Height="8" VerticalAlignment="Center" />
+                    </Button>
                 </StackPanel>
-            </Button>
+                <StackPanel Orientation="Horizontal" Margin="0 0 2 0">
+                    <Button Command="{Binding SelectRoleCommand}" Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <StackPanel Orientation="Horizontal">
+                            <icons:PackIconMaterial Kind="Security" HorizontalAlignment="Center" Width="10" Height="10" VerticalAlignment="Center" />
+                            <TextBlock Margin="5,0,0,0" Text="{Binding RoleFilterText}" FontFamily="{StaticResource PoppinsLight}" FontSize="12" />
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding ClearRoleCommand}" Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <icons:PackIconMaterial Kind="Close" HorizontalAlignment="Center" Width="8" Height="8" VerticalAlignment="Center" />
+                    </Button>
+                </StackPanel>
+                <Button Grid.Column="1" Command="{Binding CreateItemCommand}" Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <icons:PackIconMaterial Kind="Plus" HorizontalAlignment="Center" Width="10" Height="10" VerticalAlignment="Center" />
+                        <TextBlock Margin="5,0,0,0" Text="{Binding CreateText}" FontFamily="{StaticResource PoppinsLight}" FontSize="12" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
             <ScrollViewer VerticalScrollBarVisibility="Auto">

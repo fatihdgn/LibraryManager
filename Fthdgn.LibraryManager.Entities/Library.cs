@@ -18,5 +18,7 @@ namespace Fthdgn.LibraryManager.Entities
         public virtual List<Author> Authors { get; set; }
         public virtual List<UserRole> UserRoles { get; set; } = new List<UserRole>();
         public virtual List<Loan> Loans { get; set; } = new List<Loan>();
+
+        public override string ToString() => Name;
     }
 }

@@ -11,5 +11,7 @@ namespace Fthdgn.LibraryManager.Entities
         public virtual string Name { get; set; }
         public virtual StringListJsonEntity Scopes { get; set; } = new StringListJsonEntity();
         public virtual List<UserRole> Users { get; set; } = new List<UserRole>();
+
+        public override string ToString() => Name;
     }
 }
