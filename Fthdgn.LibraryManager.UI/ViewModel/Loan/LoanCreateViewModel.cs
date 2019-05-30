@@ -27,10 +27,12 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         public async Task SelectBookAsync()
         {
             Mode = DetailMode.Select;
+            Locator.Books.HideLoaned = true;
             Locator.Books.CanSelect = true;
             Locator.Main.GoTo(Locator.Books);
             var book = await Locator.Books.SelectItemDialogAsync();
             Locator.Books.CanSelect = false;
+            Locator.Books.HideLoaned = false;
             Locator.Main.GoBack();
             Mode = DetailMode.Create;
 

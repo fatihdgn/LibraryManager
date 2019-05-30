@@ -10,13 +10,14 @@ namespace Fthdgn.LibraryManager.UI.Models
 {
     public class Options<T> : ObservableObject
     {
-        public Options(T value, bool isViewable = false, bool isEditable = false, bool isDeletable = false, bool isSelectable = false)
+        public Options(T value, bool isViewable = false, bool isEditable = false, bool isDeletable = false, bool isSelectable = false, object tag = null)
         {
             Value = value;
             IsViewable = isViewable;
             IsEditable = isEditable;
             IsDeletable = isDeletable;
             IsSelectable = isSelectable;
+            Tag = tag;
             ToggleOptionsCommand = new RelayCommand(ToggleOptions);
         }
 
@@ -37,6 +38,12 @@ namespace Fthdgn.LibraryManager.UI.Models
                     (this.value as ViewModelBase).PropertyChanged += (_, __) => IsChanged = true;
             }
         }
+
+
+        object tag;
+        public object Tag { get => tag; set { Set(ref tag, value); RaisePropertyChanged(nameof(HasTag)); } }
+
+        public bool HasTag => Tag != null;
 
         private bool isViewable;
         public bool IsViewable

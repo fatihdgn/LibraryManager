@@ -53,12 +53,25 @@
                                         <ColumnDefinition />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal" >
                                         <icons:PackIconMaterial Kind="LibraryBooks" HorizontalAlignment="Center" Width="32" Height="32" Foreground="{DynamicResource AccentColorBrush}" />
-                                        <TextBlock Text="{Binding Value.Name}" Style="{DynamicResource Header}" VerticalAlignment="Center" Margin="5,0,0,0" />
+                                        <StackPanel Margin="5,0,0,0">
+                                            <TextBlock Text="{Binding Value.Name}" Style="{DynamicResource Header}" VerticalAlignment="Center"  />
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Value.Author.Name}" FontFamily="{StaticResource PoppinsLight}" VerticalAlignment="Center"  />
+                                                <TextBlock Text="{Binding Value.Author.Surname}" FontFamily="{StaticResource PoppinsLight}" VerticalAlignment="Center" Margin="5,0,0,0" />
+                                            </StackPanel>
+                                        </StackPanel>
                                     </StackPanel>
                                     <StackPanel Grid.Column="1" Orientation="Horizontal">
                                         <StackPanel Orientation="Horizontal" Visibility="{Binding IsOptionsAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <Button Margin="2 0" Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self},Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding DataContext.ViewLoanedUserCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}" CommandParameter="{Binding}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <icons:PackIconMaterial Kind="Account" VerticalAlignment="Center" HorizontalAlignment="Center" Width="12" Height="12" />
+                                                    <TextBlock Text="{Binding Tag.Name}" FontFamily="{StaticResource PoppinsLight}" FontSize="12" VerticalAlignment="Center" Margin="5,0,0,0" />
+                                                    <TextBlock Text="{Binding Tag.Surname}" FontFamily="{StaticResource PoppinsLight}" FontSize="12" VerticalAlignment="Center" Margin="5,0,0,0" />
+                                                </StackPanel>
+                                            </Button>
                                             <Button Margin="2 0" Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self},Converter={StaticResource BooleanToVisibilityConverter}}" Command="{Binding DataContext.ViewLoansCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}" CommandParameter="{Binding}">
                                                 <icons:PackIconOcticons Kind="Repo" HorizontalAlignment="Center" Width="16" Height="16" />
                                             </Button>

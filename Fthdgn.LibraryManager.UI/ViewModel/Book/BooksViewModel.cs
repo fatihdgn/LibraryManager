@@ -32,7 +32,23 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             ViewLoansCommand = new RelayCommand<Options<Book>>(ViewLoans, CanViewLoans);
             SelectAuthorCommand = new RelayCommand(async () => await SelectAuthorAsync(), CanSelectAuthor, true);
             ClearAuthorCommand = new RelayCommand(ClearAuthor, CanClearAuthor);
+            ViewLoanedUserCommand = new RelayCommand<Options<Book>>(ViewLoanedUser, CanViewLoanedUser);
         }
+
+        RelayCommand<Options<Book>> viewUsersCommand;
+        public RelayCommand<Options<Book>> ViewLoanedUserCommand { get => viewUsersCommand; set => Set(ref viewUsersCommand, value); }
+
+        public bool CanViewLoanedUser(Options<Book> item) => !CanSelect && Locator.Main.Scopes.User_Read && item.Tag != null;
+        public void ViewLoanedUser(Options<Book> item)
+        {
+            Locator.Loans.User = item.Tag as User;
+            Locator.Loans.Book = item.Value;
+            Locator.Main.GoTo(Locator.Loans);
+        }
+
+
+        bool hideLoaned;
+        public bool HideLoaned { get => hideLoaned; set { Set(ref hideLoaned, value); OnNavigating(); } }
 
         RelayCommand<Options<Book>> viewLoansCommand;
         public RelayCommand<Options<Book>> ViewLoansCommand { get => viewLoansCommand; set => Set(ref viewLoansCommand, value); }
@@ -68,9 +84,14 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         public bool CanClearAuthor() => IsAuthorFiltered;
         public void ClearAuthor() => Author = null;
 
-        protected override IEnumerable<Book> ProvideItems() => Managers.Repositories.Books.Query().As(q => IsAuthorFiltered ? q.Where(x => x.Author.Id == Author.Id) : q).Where(x => x.Library.Id == Locator.Main.Library.Id).OrderBy(x => x.Name);
-        protected override Options<Book> ProvideOptions(Book item) => Locator.Main.Scopes.As(s => new Options<Book>(item, s.Book_Read, s.Book_All, s.Book_All, CanSelect));
-        protected override bool FilterItem(string search, Book item) => item.Name.ToLowerInvariant().Contains(search.ToLowerInvariant());
+        protected override IEnumerable<Book> ProvideItems() => 
+            Managers.Repositories.Books.Query()
+            .Where(x => x.Library.Id == Locator.Main.Library.Id)
+            .As(q => IsAuthorFiltered ? q.Where(x => x.Author.Id == Author.Id) : q)
+            .As(q => HideLoaned ? q.Where(x => !x.Loans.Any(z => z.ReturnedAt == null)) : q)
+            .OrderBy(x => x.Name);
+        protected override Options<Book> ProvideOptions(Book item) => Locator.Main.Scopes.As(s => new Options<Book>(item, s.Book_Read, s.Book_All, s.Book_All, CanSelect, Managers.Repositories.Loans.Query()?.FirstOrDefault(x => x.Book.Id == item.Id && x.ReturnedAt == null)?.User));
+        protected override bool FilterItem(string search, Book item) => item.Name.ToLowerInvariant().Contains(search.ToLowerInvariant()) || (item.Author?.Name?.ToLowerInvariant()?.Contains(search.ToLowerInvariant()) ?? false) || (item.Author?.Surname?.ToLowerInvariant()?.Contains(search.ToLowerInvariant()) ?? false);
 
         protected override Book Map(BookViewModel item, Book model = null)
         {
