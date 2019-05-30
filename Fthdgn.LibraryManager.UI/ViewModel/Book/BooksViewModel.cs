@@ -34,6 +34,11 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             ClearAuthorCommand = new RelayCommand(ClearAuthor, CanClearAuthor);
             ViewLoanedUserCommand = new RelayCommand<Options<Book>>(ViewLoanedUser, CanViewLoanedUser);
         }
+        
+        bool hideLoaned;
+        public bool HideLoaned { get => hideLoaned; set { Set(ref hideLoaned, value); OnNavigating(); } }
+
+        #region Loaned User
 
         RelayCommand<Options<Book>> viewUsersCommand;
         public RelayCommand<Options<Book>> ViewLoanedUserCommand { get => viewUsersCommand; set => Set(ref viewUsersCommand, value); }
@@ -46,10 +51,10 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             Locator.Main.GoTo(Locator.Loans);
         }
 
-
-        bool hideLoaned;
-        public bool HideLoaned { get => hideLoaned; set { Set(ref hideLoaned, value); OnNavigating(); } }
-
+        #endregion
+        
+        #region Loans
+        
         RelayCommand<Options<Book>> viewLoansCommand;
         public RelayCommand<Options<Book>> ViewLoansCommand { get => viewLoansCommand; set => Set(ref viewLoansCommand, value); }
 
@@ -59,6 +64,10 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
             Locator.Loans.Book = item.Value;
             Locator.Main.GoTo(Locator.Loans);
         }
+
+        #endregion
+        
+        #region Author w/ Commands
 
         Author author;
         public Author Author { get => author; set { Set(ref author, value); OnNavigating(); RaisePropertyChanged(nameof(AuthorFilterText)); RaisePropertyChanged(nameof(IsAuthorFiltered)); ClearAuthorCommand.RaiseCanExecuteChanged(); } }
@@ -83,6 +92,8 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
         public bool CanClearAuthor() => IsAuthorFiltered;
         public void ClearAuthor() => Author = null;
+
+        #endregion
 
         protected override IEnumerable<Book> ProvideItems() => 
             Managers.Repositories.Books.Query()
