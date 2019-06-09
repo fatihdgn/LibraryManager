@@ -50,7 +50,7 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
         protected override RoleViewModel Map(Role item, RoleViewModel model = null)
         {
             var map = base.Map(item, model);
-            map.Scopes = new ObservableCollection<Selectable<string>>(Managers.Scopes.Read().Concat(Managers.Scopes.All()).Select(x => new Selectable<string>(x, item.Scopes.Value.Contains(x))));
+            map.Scopes = new ObservableCollection<Selectable<string>>(Managers.Scopes.Read().Concat(Managers.Scopes.All()).Concat(Managers.Scopes.Loan()).Distinct().OrderBy(x => x).Select(x => new Selectable<string>(x, item.Scopes.Value.Contains(x))));
             return map;
         }
         protected override Role Map(RoleViewModel item, Role model = null)

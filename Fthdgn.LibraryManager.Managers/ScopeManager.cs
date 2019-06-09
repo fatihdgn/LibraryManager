@@ -52,6 +52,15 @@ namespace Fthdgn.LibraryManager.Managers
             yield return Library_All;
         }
 
+        public IEnumerable<string> Loan()
+        {
+            yield return Loan_Read;
+            yield return Loan_Create;
+            yield return Loan_Create_OnBehalf;
+            yield return Loan_All;
+
+        }
+
         public IEnumerable<string> Customer()
         {
             yield return Author_Read;
