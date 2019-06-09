@@ -2,6 +2,7 @@
 using Fthdgn.LibraryManager.Extensions;
 using Fthdgn.LibraryManager.Managers;
 using Fthdgn.LibraryManager.UI.Models;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,18 @@ namespace Fthdgn.LibraryManager.UI.ViewModel
 
             Managers = managers;
             Messenger.Default.Register<PropertyChangedMessage<Library>>(this, pcm => OnNavigating());
+            ViewBooksCommand = new RelayCommand<Options<Author>>(ViewBooks, CanViewBooks);
+
+        }
+
+        RelayCommand<Options<Author>> viewBooksCommand;
+        public RelayCommand<Options<Author>> ViewBooksCommand { get => viewBooksCommand; set => Set(ref viewBooksCommand, value); }
+
+        public bool CanViewBooks(Options<Author> item) => !CanSelect && Locator.Main.Scopes.Book_Read;
+        public void ViewBooks(Options<Author> item)
+        {
+            Locator.Books.Author = item.Value;
+            Locator.Main.GoTo(Locator.Books);
         }
 
         protected override IEnumerable<Author> ProvideItems() => Managers.Repositories.Authors.Query().Where(x => x.Library.Id == Locator.Main.Library.Id).OrderBy(x => x.Name);
