@@ -12,6 +12,20 @@
         FontFamily="{StaticResource PoppinsLight}"
         
         Title="{Binding Title}" TitleCharacterCasing="Normal" Height="450" Width="800" MinHeight="450" MinWidth="800">
+    <!--Icon="icon.ico"
+        ShowIconOnTitleBar="True"-->
+    <!--<mah:MetroWindow.IconTemplate>
+        <DataTemplate>
+            <Grid Width="{TemplateBinding Width}"
+                 Height="{TemplateBinding Height}"
+                 Margin="5"
+                 Background="Transparent"
+                 RenderOptions.EdgeMode="Aliased"
+                 RenderOptions.BitmapScalingMode="HighQuality">
+                <Image Source="icon.ico"></Image>
+            </Grid>
+        </DataTemplate>
+    </mah:MetroWindow.IconTemplate>-->
     <mah:MetroWindow.TitleTemplate>
         <DataTemplate>
             <TextBlock Text="{TemplateBinding Content}"
